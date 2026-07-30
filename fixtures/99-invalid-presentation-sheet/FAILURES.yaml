@@ -1,0 +1,6 @@
+expectedFailures:
+  - runtime sheet contains presentation text
+  - inconsistent cell geometry
+  - no trustworthy manifest mapping
+  - exact dimensions not verified
+expectedAction: deterministicReexport

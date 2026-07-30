@@ -1,0 +1,15 @@
+releaseVersion: 1.0.0-rc1
+stage: promptH
+limits:
+  mainInstructionCharacters: 8000
+  permanentKnowledgeFiles: 20
+observed:
+  mainInstructionCharacters: 7463
+  permanentKnowledgeUploads: 12
+  knowledgeDirectoryFilesIncludingManifest: 13
+  previewTests: 15
+  schemas: 3
+status:
+  automatedStructuralPreflight: Passed
+  manualPreviewTests: Not verified
+  publicRelease: Blocked pending manual Preview tests

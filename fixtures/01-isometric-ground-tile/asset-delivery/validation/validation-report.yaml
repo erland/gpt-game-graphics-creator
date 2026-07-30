@@ -1,0 +1,34 @@
+packageId: fixture.01-isometric-ground-tile.delivery
+packageVersion: 1.0.0
+scope:
+  inspectedFiles:
+  - manifest/assets.yaml
+  affectedAssets:
+  - iso_ground_grass
+overallStatus: Not verified
+maturityImpact:
+  maximumSupportedMaturity: productionCandidate
+  reason: Binary output is omitted from this reference fixture.
+assumptions: []
+unresolvedQuestions: []
+checks:
+- id: DIM-001
+  category: technicalExport
+  requirementSource: ASSET-SPEC.yaml
+  acceptanceCriterion: Image is exactly 128x64 pixels.
+  status: Not verified
+  affectedAssets:
+  - iso_ground_grass
+  blocking: true
+  evidence: No binary image included.
+  recommendedAction: Validate a generated output file.
+revision:
+  required: false
+  affectedAssets: []
+  regenerationScope: none
+  notes: Fixture demonstrates honest Not verified reporting.
+externalChecks:
+- id: EXT-SPRITEKIT
+  owner: developer
+  status: Not verified
+  description: Load and render in SpriteKit.

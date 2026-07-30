@@ -1,0 +1,23 @@
+packageId: fixture.02-isometric-prop
+packageVersion: 1.0.0
+requestStatus: approvedForProduction
+requestedMaturity: productionCandidate
+assets:
+  - id: industrial_pillar_blue
+    assetType: prop
+    description: Reference fixture for 02-isometric-prop.
+    technical:
+      projection: isometric
+      canvasSize: [128, 256]
+      logicalTileSize: [128, 64]
+      logicalFootprint: [1, 1]
+      anchorPoint: [0.5, 0.12]
+      visualOverflow: true
+      transparentBackground: true
+      lightingDirection: upperLeft
+      outputMode: both
+    acceptanceCriteria:
+      - Output dimensions match the declaration.
+      - Runtime output contains no labels, guides, or mockup background.
+    externalChecks:
+      - SpriteKit loading remains developer-side.

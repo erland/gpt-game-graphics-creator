@@ -1,0 +1,37 @@
+packageId: fixture.01-isometric-ground-tile.delivery
+packageVersion: 1.0.0
+sourceRequest:
+  packageId: fixture.01-isometric-ground-tile
+  packageVersion: 1.0.0
+deliveryState: reviewDelivery
+assumptions: []
+unresolvedQuestions: []
+assets:
+- id: iso_ground_grass
+  sourceAssetId: iso_ground_grass
+  assetType: groundTile
+  maturity: productionCandidate
+  path: output/individual/iso_ground_grass.png
+  format: png
+  pixelSize:
+  - 128
+  - 64
+  hasAlpha: true
+  canvasSize:
+  - 128
+  - 64
+  logicalFootprint:
+  - 1
+  - 1
+  anchorPoint:
+  - 0.5
+  - 0.5
+  validationSummary:
+    status: Not verified
+    reportChecks:
+    - DIM-001
+    - ALPHA-001
+  knownLimitations:
+  - Binary image omitted from documentation fixture.
+  externalChecks:
+  - SpriteKit loading not verified.

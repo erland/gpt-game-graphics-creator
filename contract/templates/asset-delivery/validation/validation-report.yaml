@@ -1,0 +1,57 @@
+packageId: industrial-demo-delivery
+packageVersion: 0.1.0
+scope:
+  inspectedFiles:
+    - output/individual/industrial_pillar_blue.png
+    - manifest/assets.yaml
+  affectedAssets: [industrial_pillar_blue]
+overallStatus: Not verified
+maturityImpact:
+  maximumSupportedMaturity: productionCandidate
+  reason: Graphics-side file checks are included, but developer-side integration remains external.
+assumptions: []
+unresolvedQuestions: []
+checks:
+  - id: FILE-001
+    category: technicalExport
+    requirementSource: ASSET-SPEC.yaml#assets.industrial_pillar_blue.format
+    acceptanceCriterion: Output exists and decodes as PNG.
+    status: Not verified
+    affectedAssets: [industrial_pillar_blue]
+    blocking: true
+    evidence: Template only; inspect the produced file.
+    recommendedAction: Decode and inspect the written output.
+  - id: DIM-001
+    category: technicalExport
+    requirementSource: ASSET-SPEC.yaml#assets.industrial_pillar_blue.canvasSize
+    acceptanceCriterion: Actual dimensions equal 128x256 pixels.
+    status: Not verified
+    affectedAssets: [industrial_pillar_blue]
+    blocking: true
+    evidence: Template only; measure the produced file.
+  - id: ALPHA-001
+    category: technicalExport
+    requirementSource: ASSET-SPEC.yaml#assets.industrial_pillar_blue.transparentBackground
+    acceptanceCriterion: PNG contains a usable alpha channel and no unintended opaque background.
+    status: Not verified
+    affectedAssets: [industrial_pillar_blue]
+    blocking: true
+    evidence: Template only; inspect alpha on the produced file.
+  - id: MANIFEST-001
+    category: manifest
+    requirementSource: Asset Delivery Contract
+    acceptanceCriterion: Manifest path, pixel size and asset ID match the actual output.
+    status: Not verified
+    affectedAssets: [industrial_pillar_blue]
+    blocking: true
+    evidence: Template only; compare manifest with the produced file.
+revision:
+  required: false
+  affectedAssets: []
+  regenerationScope: none
+  notes: Set after validation.
+externalChecks:
+  - id: EXT-SPRITEKIT-001
+    owner: developer
+    status: Not verified
+    description: SpriteKit loading and in-game placement are not graphics-side checks.

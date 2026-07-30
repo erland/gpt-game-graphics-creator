@@ -1,0 +1,114 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "https://example.invalid/game-graphics-creator/asset-request.schema.yaml"
+title: Asset Request Specification
+type: object
+additionalProperties: false
+required: [packageId, packageVersion, requestStatus, requestedMaturity, assets]
+properties:
+  packageId:
+    type: string
+    pattern: "^[a-z0-9][a-z0-9._-]*$"
+  packageVersion:
+    type: string
+    pattern: "^[0-9]+\\.[0-9]+\\.[0-9]+(?:[-+][A-Za-z0-9.-]+)?$"
+  requestStatus:
+    enum: [draft, readyForReview, approvedForProduction, revisionRequested]
+  requestedMaturity:
+    enum: [designSheet, prototypeAsset, productionCandidate, productionReady]
+  sourceDelivery:
+    type: [object, "null"]
+    additionalProperties: false
+    required: [packageId, packageVersion]
+    properties:
+      packageId: {type: string}
+      packageVersion: {type: string}
+  defaults:
+    $ref: "#/$defs/technicalFields"
+  assets:
+    type: array
+    minItems: 1
+    items:
+      allOf:
+        - type: object
+          additionalProperties: false
+          required: [id, assetType]
+          properties:
+            id:
+              type: string
+              pattern: "^[a-z0-9][a-z0-9_]*$"
+            assetType:
+              enum: [designSheet, individualSprite, characterSpriteSet, groundTile, wallOrEdgeTile, multiTileStructure, prop, interactiveObject, tileSheet, spriteSheet, animationSheet, vfxSheet, uiSheet, iconSheet, background, parallaxLayer, textureAtlasSource]
+            description: {type: string}
+            requestedMaturity:
+              enum: [designSheet, prototypeAsset, productionCandidate, productionReady]
+            technical:
+              $ref: "#/$defs/technicalFields"
+            acceptanceCriteria:
+              type: array
+              items: {type: string}
+            externalChecks:
+              type: array
+              items: {type: string}
+$defs:
+  size2:
+    type: array
+    minItems: 2
+    maxItems: 2
+    items: {type: integer, minimum: 1}
+  number2:
+    type: array
+    minItems: 2
+    maxItems: 2
+    items: {type: number}
+  technicalFields:
+    type: object
+    additionalProperties: false
+    properties:
+      projection: {enum: [orthographic, isometric, dimetric, perspective, screenSpace]}
+      orientation: {type: string}
+      canvasSize: {$ref: "#/$defs/size2"}
+      logicalTileSize: {$ref: "#/$defs/size2"}
+      logicalFootprint: {$ref: "#/$defs/size2"}
+      visualBounds:
+        type: array
+        minItems: 4
+        maxItems: 4
+        items: {type: integer}
+      anchorPoint:
+        $ref: "#/$defs/number2"
+      visualOverflow: {type: boolean}
+      transparentBackground: {type: boolean}
+      alphaPolicy: {type: string}
+      palette: {type: string}
+      lightingDirection: {type: string}
+      outlinePolicy: {type: string}
+      shadowPolicy: {type: string}
+      directions:
+        type: array
+        uniqueItems: true
+        items: {type: string}
+      states:
+        type: array
+        uniqueItems: true
+        items: {type: string}
+      frameCount: {type: integer, minimum: 1}
+      frameOrder:
+        type: array
+        items: {type: string}
+      fps: {type: number, exclusiveMinimum: 0}
+      loop: {type: boolean}
+      grid:
+        type: object
+        additionalProperties: false
+        required: [rows, columns, cellSize]
+        properties:
+          rows: {type: integer, minimum: 1}
+          columns: {type: integer, minimum: 1}
+          cellSize: {$ref: "#/$defs/size2"}
+      spacing: {$ref: "#/$defs/size2"}
+      margin: {$ref: "#/$defs/size2"}
+      atlasGroup: {type: string}
+      outputMode: {enum: [individual, sheet, both, previewOnly]}
+      filtering: {enum: [nearest, linear, unspecified]}
+      scaling: {type: string}
+      localizationConstraints: {type: string}

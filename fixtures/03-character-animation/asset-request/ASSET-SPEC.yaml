@@ -1,0 +1,29 @@
+packageId: fixture.03-character-animation
+packageVersion: 1.0.0
+requestStatus: approvedForProduction
+requestedMaturity: productionCandidate
+assets:
+  - id: scout_walk
+    assetType: animationSheet
+    description: Reference fixture for 03-character-animation.
+    technical:
+      projection: isometric
+      canvasSize: [512, 512]
+      transparentBackground: true
+      directions: [northEast, southEast, southWest, northWest]
+      states: [walk]
+      frameCount: 16
+      fps: 8
+      loop: true
+      grid:
+        rows: 4
+        columns: 4
+        cellSize: [128, 128]
+      spacing: [1, 1]
+      margin: [1, 1]
+      outputMode: both
+    acceptanceCriteria:
+      - Output dimensions match the declaration.
+      - Runtime output contains no labels, guides, or mockup background.
+    externalChecks:
+      - SpriteKit loading remains developer-side.

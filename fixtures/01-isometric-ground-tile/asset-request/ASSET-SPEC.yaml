@@ -1,0 +1,27 @@
+packageId: fixture.01-isometric-ground-tile
+packageVersion: 1.0.0
+requestStatus: approvedForProduction
+requestedMaturity: productionCandidate
+assets:
+  - id: iso_ground_grass
+    assetType: groundTile
+    description: Reference fixture for 01-isometric-ground-tile.
+    technical:
+      projection: isometric
+      canvasSize: [128, 64]
+      logicalTileSize: [128, 64]
+      logicalFootprint: [1, 1]
+      anchorPoint: [0.5, 0.5]
+      transparentBackground: true
+      grid:
+        rows: 1
+        columns: 1
+        cellSize: [128, 64]
+      spacing: [1, 1]
+      margin: [1, 1]
+      outputMode: both
+    acceptanceCriteria:
+      - Output dimensions match the declaration.
+      - Runtime output contains no labels, guides, or mockup background.
+    externalChecks:
+      - SpriteKit loading remains developer-side.

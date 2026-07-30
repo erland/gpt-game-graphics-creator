@@ -1,0 +1,57 @@
+releaseVersion: 1.0.0-rc1
+checks:
+- name: Main instruction limit
+  status: Passed
+  detail: 7457/8000 characters
+- name: Permanent knowledge uploads
+  status: Passed
+  detail: 12/20; missing=none
+- name: Required project files
+  status: Passed
+  detail: all present
+- name: YAML parsing
+  status: Passed
+  detail: 16 files parsed
+- name: request schema validity
+  status: Passed
+  detail: valid JSON Schema
+- name: manifest schema validity
+  status: Passed
+  detail: valid JSON Schema
+- name: validation schema validity
+  status: Passed
+  detail: valid JSON Schema
+- name: request template
+  status: Passed
+  detail: validates
+- name: delivery manifest template
+  status: Passed
+  detail: validates
+- name: validation template
+  status: Passed
+  detail: validates
+- name: ground request fixture
+  status: Passed
+  detail: validates
+- name: ground delivery fixture
+  status: Passed
+  detail: validates
+- name: ground validation fixture
+  status: Passed
+  detail: validates
+- name: prop request fixture
+  status: Passed
+  detail: validates
+- name: animation request fixture
+  status: Passed
+  detail: validates
+- name: GPT Preview test pack
+  status: Passed
+  detail: G01–G15 present with expected and failure sections
+- name: Package hygiene
+  status: Passed
+  detail: clean
+- name: Release version references
+  status: Passed
+  detail: 1.0.0-rc1 synchronized
+overall: Passed

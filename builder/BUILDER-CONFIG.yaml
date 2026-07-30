@@ -1,0 +1,14 @@
+name: Game Graphics Creator
+descriptionFile: DESCRIPTION.md
+instructionFile: MAIN-INSTRUCTION.md
+conversationStartersFile: CONVERSATION-STARTERS.md
+capabilities:
+  imageGeneration: required
+  codeInterpreterAndDataAnalysis: required
+  webSearch: recommended
+  canvas: optional
+  apps: disabled
+  customActions: disabled
+knowledgeUploadManifest: UPLOAD-MANIFEST.md
+recommendedModelPolicy: strongestAvailableCompatibleModel
+publicationStatus: privateUntilPreflight

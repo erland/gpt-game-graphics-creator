@@ -1,0 +1,26 @@
+packageId: industrial-demo-delivery
+packageVersion: 0.1.0
+sourceRequest:
+  packageId: industrial-demo-request
+  packageVersion: 0.1.0
+deliveryState: reviewDelivery
+assumptions: []
+unresolvedQuestions: []
+assets:
+  - id: industrial_pillar_blue
+    sourceAssetId: industrial_pillar_blue
+    assetType: prop
+    maturity: productionCandidate
+    path: output/individual/industrial_pillar_blue.png
+    format: png
+    pixelSize: [128, 256]
+    hasAlpha: true
+    canvasSize: [128, 256]
+    logicalFootprint: [1, 1]
+    anchorPoint: [0.5, 0.12]
+    validationSummary:
+      status: Not verified
+      reportChecks: [FILE-001, DIM-001, ALPHA-001, MANIFEST-001]
+    knownLimitations: []
+    externalChecks:
+      - SpriteKit loading not verified
