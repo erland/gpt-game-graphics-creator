@@ -1,99 +1,183 @@
-$schema: "https://json-schema.org/draft/2020-12/schema"
-$id: "https://example.invalid/game-graphics-creator/asset-delivery-manifest.schema.yaml"
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://example.invalid/game-graphics-creator/asset-delivery-manifest.schema.yaml
 title: Asset Delivery Manifest
 type: object
 additionalProperties: false
-required: [packageId, packageVersion, sourceRequest, deliveryState, assets]
+required:
+- packageId
+- packageVersion
+- sourceRequest
+- deliveryState
+- assets
 properties:
   packageId:
     type: string
-    pattern: "^[a-z0-9][a-z0-9._-]*$"
+    pattern: ^[a-z0-9][a-z0-9._-]*$
   packageVersion:
     type: string
   sourceRequest:
     type: object
     additionalProperties: false
-    required: [packageId, packageVersion]
+    required:
+    - packageId
+    - packageVersion
     properties:
-      packageId: {type: string}
-      packageVersion: {type: string}
+      packageId:
+        type: string
+      packageVersion:
+        type: string
   deliveryState:
-    enum: [structuralDraft, reviewDelivery, revisionDelivery, releaseCandidateDelivery]
+    enum:
+    - structuralDraft
+    - reviewDelivery
+    - revisionDelivery
+    - releaseCandidateDelivery
   assumptions:
     type: array
-    items: {type: string}
+    items:
+      type: string
   unresolvedQuestions:
     type: array
-    items: {type: string}
+    items:
+      type: string
   assets:
     type: array
     items:
       type: object
       additionalProperties: false
-      required: [id, sourceAssetId, assetType, maturity, path, format, pixelSize, validationSummary]
+      required:
+      - id
+      - sourceAssetId
+      - assetType
+      - productionMode
+      - maturity
+      - path
+      - format
+      - pixelSize
+      - validationSummary
       properties:
-        id: {type: string}
-        sourceAssetId: {type: string}
-        assetType: {type: string}
+        id:
+          type: string
+        sourceAssetId:
+          type: string
+        assetType:
+          type: string
         maturity:
-          enum: [designSheet, prototypeAsset, productionCandidate, productionReady]
-        path: {type: string}
-        format: {type: string}
+          enum:
+          - designSheet
+          - prototypeAsset
+          - productionCandidate
+          - productionReady
+        path:
+          type: string
+        format:
+          type: string
         pixelSize:
           type: array
           minItems: 2
           maxItems: 2
-          items: {type: integer, minimum: 1}
-        hasAlpha: {type: boolean}
+          items:
+            type: integer
+            minimum: 1
+        hasAlpha:
+          type: boolean
         canvasSize:
           type: array
           minItems: 2
           maxItems: 2
-          items: {type: integer, minimum: 1}
+          items:
+            type: integer
+            minimum: 1
         logicalFootprint:
           type: array
           minItems: 2
           maxItems: 2
-          items: {type: integer, minimum: 1}
+          items:
+            type: integer
+            minimum: 1
         anchorPoint:
           type: array
           minItems: 2
           maxItems: 2
-          items: {type: number}
+          items:
+            type: number
         sheetRegion:
           type: object
           additionalProperties: false
-          required: [x, y, width, height]
+          required:
+          - x
+          - y
+          - width
+          - height
           properties:
-            x: {type: integer, minimum: 0}
-            y: {type: integer, minimum: 0}
-            width: {type: integer, minimum: 1}
-            height: {type: integer, minimum: 1}
+            x:
+              type: integer
+              minimum: 0
+            y:
+              type: integer
+              minimum: 0
+            width:
+              type: integer
+              minimum: 1
+            height:
+              type: integer
+              minimum: 1
         frameData:
           type: array
           items:
             type: object
             additionalProperties: false
-            required: [name, x, y, width, height]
+            required:
+            - name
+            - x
+            - y
+            - width
+            - height
             properties:
-              name: {type: string}
-              x: {type: integer, minimum: 0}
-              y: {type: integer, minimum: 0}
-              width: {type: integer, minimum: 1}
-              height: {type: integer, minimum: 1}
-              durationMs: {type: integer, minimum: 1}
+              name:
+                type: string
+              x:
+                type: integer
+                minimum: 0
+              y:
+                type: integer
+                minimum: 0
+              width:
+                type: integer
+                minimum: 1
+              height:
+                type: integer
+                minimum: 1
+              durationMs:
+                type: integer
+                minimum: 1
         validationSummary:
           type: object
           additionalProperties: false
-          required: [status]
+          required:
+          - status
           properties:
-            status: {enum: [Passed, Failed, Not verified, Not applicable]}
+            status:
+              enum:
+              - Passed
+              - Failed
+              - Not verified
+              - Not applicable
             reportChecks:
               type: array
-              items: {type: string}
+              items:
+                type: string
         knownLimitations:
           type: array
-          items: {type: string}
+          items:
+            type: string
         externalChecks:
           type: array
-          items: {type: string}
+          items:
+            type: string
+        productionMode:
+          enum:
+          - technicalPrototype
+          - visualPrototype
+          - productionArt
+          - visualUpgrade

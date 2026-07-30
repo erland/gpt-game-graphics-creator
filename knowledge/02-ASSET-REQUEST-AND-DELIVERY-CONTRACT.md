@@ -46,6 +46,7 @@ A request package must declare:
 - `packageVersion`;
 - `requestStatus`;
 - `requestedMaturity`;
+- `productionMode`;
 - at least one asset entry;
 - a stable unique `id` and `assetType` for every entry;
 - enough information to identify the intended output and whether the request is exploratory or runtime-oriented.
@@ -109,7 +110,7 @@ The canonical schema is `contract/schemas/asset-request.schema.yaml`.
 
 The shared package section may define defaults. Each asset entry overrides defaults explicitly. Relevant fields include:
 
-- identity: `id`, `assetType`, `requestedMaturity`, `description`;
+- identity: `id`, `assetType`, `productionMode`, `requestedMaturity`, `description`;
 - geometry: `canvasSize`, `logicalTileSize`, `logicalFootprint`, `visualBounds`, `anchorPoint`, `visualOverflow`;
 - view: `projection`, `orientation`, `directions`;
 - rendering: `transparentBackground`, `alphaPolicy`, `palette`, `lightingDirection`, `outlinePolicy`, `shadowPolicy`;
@@ -171,7 +172,7 @@ The canonical schema is `contract/schemas/asset-delivery-manifest.schema.yaml`.
 Every runtime file must have a manifest entry. Each entry must identify:
 
 - stable asset `id`;
-- asset type and maturity;
+- asset type, production mode and maturity;
 - relative output path;
 - file format;
 - measured pixel dimensions;
@@ -224,7 +225,7 @@ A revision request must identify:
 - whether manifest regions or filenames may change;
 - expected version increment.
 
-The revised delivery must update README, manifest and validation report. Unaffected approved assets should remain byte-identical when practical.
+For a visual upgrade, the revision request must also identify the locked prototype contract and whether any technical field may change. The revised delivery must update README, manifest and validation report. Unaffected approved assets should remain byte-identical when practical.
 
 ## Versioning
 

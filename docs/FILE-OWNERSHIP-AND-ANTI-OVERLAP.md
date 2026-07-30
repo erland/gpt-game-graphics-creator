@@ -120,3 +120,5 @@ Priority order:
 6. safe assumption clearly marked as an assumption.
 
 When two permanent files conflict, update the owning file and replace duplicate text in the other file with a short reference.
+
+- `knowledge/13-PROTOTYPE-TO-PRODUCTION-ART.md` owns production-mode semantics and prototype-to-polished-art regression rules. Other files may reference but not redefine these modes.

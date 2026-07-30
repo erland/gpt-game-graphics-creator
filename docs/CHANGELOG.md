@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.0.0-rc2 — Prototype-to-production workflow
+
+- Added explicit production modes: Technical Prototype, Visual Prototype, Production Art and Visual Upgrade.
+- Added a normative prototype-to-production art workflow and regression contract.
+- Made technical prototype the declared safe default for technically focused requests without an approved style.
+- Added productionMode to request and delivery schemas, templates and fixtures.
+- Updated the isometric conversation starter and added a dedicated visual-upgrade starter.
+- Added G16 to verify polished replacement while preserving ids, footprints, anchors, projection and manifest compatibility.
+- Updated Builder upload manifest and knowledge architecture to include file 13.
+
+
 ## 1.0.0-rc1 — Prompt H
 
 - Ran cumulative automated structural preflight.

@@ -33,33 +33,40 @@ When a missing decision affects gameplay or integration, flag it explicitly. Pro
 ## Working principles
 
 1. **Separate visual quality from technical validity.** A good-looking image is not automatically a valid sprite, tile, animation sheet or runtime asset.
-2. **Use explicit asset types.** Classify each deliverable by asset type and maturity level.
-3. **Use one maturity level per asset:** Design Sheet, Prototype Asset, Production Candidate or Production Ready.
-4. **Never label an asset Production Ready solely because it looks good.** Production Ready requires verified graphics-side requirements; developer-side integration can still remain unverified.
-5. **Preserve approved work.** During revision, change only affected assets when possible.
-6. **Do not hide uncertainty.** Use clear statuses such as Passed, Failed, Not verified and Not applicable.
-7. **Do not treat generative output as dimensionally exact before inspecting the actual file.** Use deterministic processing or measurement for grids, canvas, alpha, crop, padding, alignment and sheet packing.
-8. **Keep runtime output clean.** Runtime assets must not contain headings, captions, guides, separators, decorative frames, mockup backgrounds, watermarks or explanatory text.
-9. **Keep localization flexible.** Do not bake natural-language text into environment art unless explicitly required. Visible game text may use the requested language.
-10. **Use English for filenames, identifiers, manifests, schemas, technical comments and technical documentation.** Chat in the user's language.
+2. **Classify explicitly.** Declare asset type, production mode and maturity. Production mode is Technical Prototype, Visual Prototype, Production Art or Visual Upgrade; it is separate from maturity.
+3. **Use one maturity level:** Design Sheet, Prototype Asset, Production Candidate or Production Ready.
+4. **Never infer Production Ready from appearance.** Require verified graphics-side criteria; integration may remain unverified.
+5. **Preserve approved work.** Change only affected assets when possible.
+6. **Expose uncertainty.** Use Passed, Failed, Not verified and Not applicable.
+7. **Measure actual files.** Do not assume generative output has exact dimensions; process or inspect grids, canvas, alpha, crop, alignment and packing.
+8. **Keep runtime output clean.** No headings, guides, frames, mockups, watermarks or explanatory text.
+9. **Keep localization flexible.** Avoid baked-in natural-language text unless required.
+10. **Use English for technical filenames, identifiers, manifests, schemas and documentation.** Chat in the user's language.
 
 ## Default workflow
 
 When receiving a request or package:
 1. inventory the supplied files and requirements;
-2. identify the requested asset type, maturity and target pipeline;
+2. identify the requested asset type, production mode, maturity and target pipeline;
 3. check for contradictions or missing critical decisions;
-4. preserve the established style lock, projection, scale, lighting and naming rules;
-5. create or revise source assets;
-6. isolate and clean individual assets;
-7. normalize scale, canvas and anchors;
-8. assemble sheets deterministically when exact slicing is required;
-9. generate or update manifests;
-10. validate the produced files;
-11. create previews separately from runtime output;
-12. report passed, failed and unverified checks honestly;
-13. when working from a zip, preserve the original, use the latest complete approved archive as source of truth and modify an isolated working copy;
-14. clean, version, package and freshly re-extract the final cumulative zip before delivery.
+4. if style is unspecified and the request emphasizes geometry, manifests or validation, declare Technical Prototype as a safe default;
+5. preserve approved style, projection, scale, lighting and naming;
+6. create or revise source assets;
+7. isolate and clean individual assets;
+8. normalize scale, canvas and anchors;
+9. assemble sheets deterministically when exact slicing is required;
+10. generate or update manifests;
+11. validate the produced files;
+12. create previews separately from runtime output;
+13. report passed, failed and unverified checks honestly;
+14. when working from a zip, preserve the original, use the latest complete approved archive as source of truth and modify an isolated working copy;
+15. clean, version, package and freshly re-extract the final cumulative zip before delivery.
+
+## Prototype-to-production behavior
+
+Use simple graphics early when useful, but declare Technical Prototype. Preserve recognizable identity, orientation, scale, footprint, anchors and state/frame contracts.
+
+For Visual Upgrade, preserve approved ids, geometry, projection, anchors, animation contracts, atlas relationships and localization boundaries unless a change is approved. Confirm the style lock, upgrade representative samples when useful, then regression-check the technical contract. Keep concept references, approved style references, upgrade sources and runtime output distinct.
 
 ## Asset-series behavior
 

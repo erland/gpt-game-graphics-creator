@@ -1,5 +1,7 @@
 # Asset Maturity and Validation
 
+Production mode is separate from maturity and validation status. File 13 owns Technical Prototype, Visual Prototype, Production Art and Visual Upgrade semantics.
+
 ## Purpose
 
 Own the maturity model, graphics-side validation statuses, blocking logic, evidence requirements, delivery acceptance and revision triage for all asset families.

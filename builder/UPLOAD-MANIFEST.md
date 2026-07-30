@@ -6,7 +6,7 @@ The Builder supports a limited permanent knowledge set. Upload normative referen
 
 ## Upload now
 
-Upload these 12 files in numeric order:
+Upload these 13 files in numeric order:
 
 1. `knowledge/01-ROLE-AND-RESPONSIBILITY.md`
 2. `knowledge/02-ASSET-REQUEST-AND-DELIVERY-CONTRACT.md`
@@ -20,14 +20,15 @@ Upload these 12 files in numeric order:
 10. `knowledge/10-VFX-BACKGROUNDS-AND-PARALLAX.md`
 11. `knowledge/11-PROGRAMMATIC-POST-PROCESSING.md`
 12. `knowledge/12-ZIP-WORKFLOW-AND-RELEASE.md`
+13. `knowledge/13-PROTOTYPE-TO-PRODUCTION-ART.md`
 
 ## Add in later prompts
 
 Reserve upload slots for:
 
-13. `knowledge/13-ORIGINALITY-REFERENCES-AND-RIGHTS.md`
-14. `knowledge/14-PIXEL-ART-PIPELINE.md`
-15. `knowledge/15-HIGH-RESOLUTION-2D-PIPELINE.md`
+14. `knowledge/14-ORIGINALITY-REFERENCES-AND-RIGHTS.md`
+15. `knowledge/15-PIXEL-ART-PIPELINE.md`
+16. `knowledge/16-HIGH-RESOLUTION-2D-PIPELINE.md`
 
 The planned final knowledge set therefore remains below the 20-file limit.
 

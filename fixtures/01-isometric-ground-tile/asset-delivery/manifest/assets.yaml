@@ -35,3 +35,4 @@ assets:
   - Binary image omitted from documentation fixture.
   externalChecks:
   - SpriteKit loading not verified.
+  productionMode: technicalPrototype

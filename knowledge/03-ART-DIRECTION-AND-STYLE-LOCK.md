@@ -76,3 +76,8 @@ When the style lock changes:
 - Maturity thresholds and validation status meanings belong to file 04.
 - Asset-family implementation details belong to files 05–10.
 - Deterministic image processing belongs to file 11.
+
+
+## Prototype and upgrade relationship
+
+A technical prototype does not require a fully approved style lock, but it must preserve useful identity, scale, orientation and silhouette cues. Production-art work and visual upgrades require an approved or explicitly provisional style lock. The detailed upgrade contract is owned by file 13.

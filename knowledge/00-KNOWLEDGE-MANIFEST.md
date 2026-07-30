@@ -33,7 +33,7 @@ Define the planned knowledge architecture for Game Graphics Creator, with clear 
 - Builder-facing metadata belongs in `builder/`, not knowledge files.
 - Test cases and fixtures belong outside the permanent knowledge set unless later evaluation shows that a compact test-reference file improves behavior.
 
-## Implementation status at 1.0.0-rc1
+## Implementation status at 1.0.0-rc2
 
 Implemented:
 - `01-ROLE-AND-RESPONSIBILITY.md`
@@ -48,8 +48,9 @@ Implemented:
 - `10-VFX-BACKGROUNDS-AND-PARALLAX.md`
 - `11-PROGRAMMATIC-POST-PROCESSING.md`
 - `12-ZIP-WORKFLOW-AND-RELEASE.md`
+- `13-PROTOTYPE-TO-PRODUCTION-ART.md`
 
 Reserved for future expansion, not required for this release candidate:
-- `13-ORIGINALITY-REFERENCES-AND-RIGHTS.md`
-- `14-PIXEL-ART-PIPELINE.md`
-- `15-HIGH-RESOLUTION-2D-PIPELINE.md`
+- `14-ORIGINALITY-REFERENCES-AND-RIGHTS.md`
+- `15-PIXEL-ART-PIPELINE.md`
+- `16-HIGH-RESOLUTION-2D-PIPELINE.md`

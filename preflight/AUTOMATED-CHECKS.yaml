@@ -1,57 +1,24 @@
-releaseVersion: 1.0.0-rc1
+version: 1.0.0-rc2
+overallStatus: Passed
 checks:
-- name: Main instruction limit
+- id: instruction-size
   status: Passed
-  detail: 7457/8000 characters
-- name: Permanent knowledge uploads
+  evidence: 7943 characters; limit 8000
+- id: knowledge-count
   status: Passed
-  detail: 12/20; missing=none
-- name: Required project files
+  evidence: 13 permanent uploads; limit 20
+- id: schemas
   status: Passed
-  detail: all present
-- name: YAML parsing
+  evidence: Request and delivery schemas parse and templates/positive fixtures validate
+- id: production-mode
   status: Passed
-  detail: 16 files parsed
-- name: request schema validity
+  evidence: productionMode exists in request and delivery schemas and templates
+- id: upgrade-workflow
   status: Passed
-  detail: valid JSON Schema
-- name: manifest schema validity
+  evidence: Knowledge file 13 and G16 are present
+- id: test-pack
   status: Passed
-  detail: valid JSON Schema
-- name: validation schema validity
-  status: Passed
-  detail: valid JSON Schema
-- name: request template
-  status: Passed
-  detail: validates
-- name: delivery manifest template
-  status: Passed
-  detail: validates
-- name: validation template
-  status: Passed
-  detail: validates
-- name: ground request fixture
-  status: Passed
-  detail: validates
-- name: ground delivery fixture
-  status: Passed
-  detail: validates
-- name: ground validation fixture
-  status: Passed
-  detail: validates
-- name: prop request fixture
-  status: Passed
-  detail: validates
-- name: animation request fixture
-  status: Passed
-  detail: validates
-- name: GPT Preview test pack
-  status: Passed
-  detail: G01–G15 present with expected and failure sections
-- name: Package hygiene
-  status: Passed
-  detail: clean
-- name: Release version references
-  status: Passed
-  detail: 1.0.0-rc1 synchronized
-overall: Passed
+  evidence: G01-G16 present
+- id: manual-preview
+  status: Not verified
+  evidence: Must be run in GPT Builder Preview

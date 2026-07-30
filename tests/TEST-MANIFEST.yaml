@@ -1,4 +1,4 @@
-version: 1.0.0
+version: 1.0.0-rc2
 tests:
 - id: G01
   file: G01.md
@@ -44,4 +44,7 @@ tests:
   status: notRun
 - id: G15
   file: G15.md
+  status: notRun
+- id: G16
+  file: G16.md
   status: notRun

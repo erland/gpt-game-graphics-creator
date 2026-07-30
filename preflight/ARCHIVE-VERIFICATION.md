@@ -1,6 +1,6 @@
 # Archive Verification
 
-The release archive for `1.0.0-rc1` was created from the preflight-passed working tree.
+The release archive for `1.0.0-rc2` was created from the preflight-passed working tree.
 
 Final packaging verification includes:
 
