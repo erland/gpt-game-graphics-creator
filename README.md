@@ -70,3 +70,19 @@ This package contains the cumulative result of Prompts A–H from the implementa
 - SpriteKit loading, gameplay collision, TV readability and physical Apple TV behavior
 
 See `preflight/PREFLIGHT-REPORT.md` for the detailed decision.
+
+## Portable Chat and distribution builds
+
+The repository builds two synchronized distributions from the current Builder configuration:
+
+- `game-graphics-creator-custom-gpt-vX.Y.Z.zip` — Builder fields, the 13 currently approved permanent Knowledge files, and contract schemas/templates.
+- `game-graphics-creator-chat-vX.Y.Z.zip` — portable package for a normal ChatGPT conversation, starting at `START-HERE.md`.
+
+Local build:
+
+```bash
+python3 scripts/build_distributions.py
+python3 scripts/validate_distributions.py
+```
+
+Push, pull-request and manual runs use `VERSION`. A published GitHub Release uses its `v<semver>` tag as the package version and attaches both ZIP files to the release.
