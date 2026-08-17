@@ -1,72 +1,63 @@
-# Game Graphics Creator GPT — Release Candidate
+# Game Graphics Creator GPT
 
-This package contains the cumulative result of Prompts A–H from the implementation plan:
+Game Graphics Creator is a Custom GPT package for creating, structuring, validating and revising technically usable graphics for 2D and isometric games. The repository contains the current Builder configuration, permanent Knowledge, reusable contracts/fixtures, regression tests and distribution tooling.
 
-- GPT identity, scope and responsibility boundaries
-- Main instruction below the Builder limit
-- Knowledge architecture and anti-overlap rules
-- Asset Request and Delivery Contract
-- Machine-readable schemas and reusable templates
-- Art direction and style locking
-- Separate pipelines for tiles, isometry, sprites, animation, UI, icons, VFX, backgrounds and parallax
-- Asset maturity, graphics-side validation and acceptance logic
-- Deterministic post-processing, sheet assembly and manifest generation
-- Revision triage and selective regeneration
-- Safe zip intake, cleanup, versioning and cumulative release packaging
-- Complete Builder configuration, capability guidance and upload manifest
-- Explicit Technical Prototype, Visual Prototype, Production Art and Visual Upgrade modes
-- Contract-preserving prototype-to-production art workflow
-- Reference fixtures and GPT Preview tests G01–G16
-- Automated structural preflight and release-candidate documentation
+## Current status
 
-## Package status
-
-- Stage: Prompt H — Preflight and release candidate
 - Version: `1.0.0-rc2`
-- Publication status: Keep private until the required manual GPT Preview tests have been run and accepted
-- Automated structural preflight: Passed
-- Manual GPT Preview validation: Not yet run
+- Permanent Knowledge: 13 files, defined by `builder/UPLOAD-MANIFEST.md`
+- GPT Preview regression pack: G01–G16
+- Publication: keep private until the required manual Preview tests have been executed and accepted
 
-`Release candidate` means the package is structurally ready for Builder setup and manual evaluation. It does not mean that the GPT, generated graphics, SpriteKit integration or physical-device behavior has been production verified.
+The repository no longer stores prompt-by-prompt implementation reports or old preflight snapshots; Git history is the source for that development history.
 
 ## Structure
 
-- `builder/` — GPT Builder fields, configuration, capabilities and upload manifest
-- `knowledge/` — normative GPT knowledge files
-- `contract/` — schemas and request/delivery templates
+- `builder/` — current GPT Builder fields, capability guidance and upload manifest
+- `knowledge/` — normative GPT Knowledge files
+- `contract/` — schemas and reusable request/delivery templates
 - `fixtures/` — reusable positive and negative Preview fixtures
-- `tests/` — G01–G16 Preview test cases and test manifest
-- `preflight/` — automated checks, manual-test matrix and release-candidate decision
-- `docs/` — implementation history, ownership, release checklist and changelog
+- `tests/` — G01–G16 regression cases and test manifest
+- `docs/` — active maintainer guidance and release checklist
+- `portable/` — entry point for the portable Chat package
+- `scripts/` — distribution build and validation
+- `.github/workflows/` — CI/release packaging
 
 ## Builder setup
 
-1. Copy `builder/NAME.txt`, `DESCRIPTION.md` and `MAIN-INSTRUCTION.md` into the matching Builder fields.
+1. Copy `builder/NAME.txt`, `builder/DESCRIPTION.md` and `builder/MAIN-INSTRUCTION.md` into the matching Builder fields.
 2. Add the prompts from `builder/CONVERSATION-STARTERS.md`.
 3. Configure capabilities according to `builder/CAPABILITIES.md`.
-4. Upload exactly the permanent knowledge files marked in `builder/UPLOAD-MANIFEST.md`.
-5. Keep the GPT private.
-6. Run G01–G16 according to `preflight/MANUAL-PREVIEW-TESTS.md`.
-7. Record evidence and resolve all blocking failures before expanding visibility.
+4. Upload exactly the permanent Knowledge files marked in `builder/UPLOAD-MANIFEST.md`.
+5. Keep the GPT private while validating it.
+6. Run G01–G16 from `tests/` and record actual result/evidence.
+7. Resolve blocking failures before expanding visibility.
 
-## Verified in automated preflight
+## Regression and release checks
 
-- Main instruction remains below 8,000 characters.
-- Permanent knowledge upload count remains below 20 files.
-- Required Builder and package files are present.
-- YAML files and schemas parse successfully.
-- Contract templates and fixtures validate against their schemas where applicable.
-- G01–G16 and their expected/failure sections are present.
-- Version and stage metadata are synchronized for this release candidate.
-- No nested release archives, cache files or common OS metadata are included.
-- Final archive integrity and clean extraction are verified during packaging.
+Before a release:
 
-## Still requires manual verification
+- run G01–G16 in GPT Preview;
+- verify the main instruction remains within the Builder size limit;
+- verify the Knowledge upload count and manifest;
+- parse/validate relevant YAML schemas and contract templates;
+- verify no generated cache, nested release archive or OS metadata is included;
+- build and validate both distribution ZIPs.
 
-- Actual GPT Builder upload and capability availability
-- GPT Preview behavior for G01–G16
-- Image-generation quality and identity consistency
-- Real file creation and deterministic image inspection through the configured tools
-- SpriteKit loading, gameplay collision, TV readability and physical Apple TV behavior
+`docs/RELEASE-CHECKLIST.md` contains the maintainer checklist.
 
-See `preflight/PREFLIGHT-REPORT.md` for the detailed decision.
+## Portable Chat and distribution builds
+
+The repository builds two synchronized distributions from the current Builder configuration:
+
+- `game-graphics-creator-custom-gpt-vX.Y.Z.zip` — Builder configuration, 13 approved permanent Knowledge files, and contract schemas/templates.
+- `game-graphics-creator-chat-vX.Y.Z.zip` — portable package for a normal ChatGPT conversation, starting at `START-HERE.md`.
+
+Local build:
+
+```bash
+python3 scripts/build_distributions.py
+python3 scripts/validate_distributions.py
+```
+
+Push, pull-request and manual runs use `VERSION`. A published GitHub Release uses its `v<semver>` tag as the package version and attaches both ZIP files to the release.
