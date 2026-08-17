@@ -47,4 +47,4 @@ Use a simple original icon that reads clearly at small size: a clean game-asset 
 
 ## Sharing and publication
 
-Keep the GPT private during Preview testing. Expand visibility only after Prompt H preflight and the required manual test cases have passed. Do not describe the GPT as production verified before that point.
+Keep the GPT private during Preview testing. Expand visibility only after the required G01–G16 regression cases have been run and accepted. Do not describe the GPT as production verified before that point.

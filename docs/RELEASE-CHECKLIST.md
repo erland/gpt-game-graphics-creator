@@ -20,9 +20,8 @@ Use this checklist for each cumulative GPT package release.
 ## Package maintenance
 
 - [ ] `VERSION` updated.
-- [ ] README stage and next step updated.
-- [ ] Changelog updated.
-- [ ] Stage result or release note added.
+- [ ] README current status and setup guidance reviewed.
+- [ ] Material release changes are documented in the Git commit/release description.
 - [ ] Knowledge manifest and ownership documentation updated when relevant.
 
 ## Validation

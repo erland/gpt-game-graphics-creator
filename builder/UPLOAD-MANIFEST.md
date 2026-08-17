@@ -37,8 +37,7 @@ The planned final knowledge set therefore remains below the 20-file limit.
 - `knowledge/00-KNOWLEDGE-MANIFEST.md` — architecture documentation for maintainers.
 - `contract/schemas/*` — distribute inside working request/delivery packages when needed.
 - `contract/templates/*` — provide or copy as task fixtures rather than permanent knowledge.
-- `docs/PROMPT-*-RESULT.md` — implementation history only.
-- `docs/CHANGELOG.md` — release history only.
+- Historical implementation and release notes — use Git history rather than permanent Knowledge.
 - `docs/RELEASE-CHECKLIST.md` — maintainer checklist.
 - `docs/FILE-OWNERSHIP-AND-ANTI-OVERLAP.md` — maintainer architecture guidance.
 - `README.md`, `VERSION` — package metadata.
