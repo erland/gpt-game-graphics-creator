@@ -1,0 +1,72 @@
+schema_version: 1
+project:
+  id: game-graphics-creator
+  name: Game Graphics Creator
+  profile: asset_pipeline_advanced
+
+instructions:
+  canonical: assistant/instructions.md
+  legacy_source: builder/MAIN-INSTRUCTION.md
+  preserve_legacy_source_byte_identical: true
+
+knowledge_architecture:
+  canonical_root: knowledge
+  upload_manifest: builder/UPLOAD-MANIFEST.md
+  expected_files: 13
+
+runtime:
+  chat_zip:
+    enabled: true
+  custom_gpt:
+    enabled: true
+    instruction:
+      source: assistant/instructions.md
+      packaging_path: builder/MAIN-INSTRUCTION.md
+      legacy_packaging_path_only: true
+      max_characters: 8000
+    knowledge:
+      strategy: upload_manifest
+      expected_files: 13
+  claude:
+    enabled: false
+    compatibility: reduced
+    activation: not_active
+    blocker: critical_visual_and_file_pipeline_not_guaranteed
+    assessment: docs/claude-opencode-compatibility.md
+  opencode:
+    enabled: false
+    compatibility: reduced
+    activation: not_active
+    blocker: critical_image_generation_not_guaranteed
+    assessment: docs/claude-opencode-compatibility.md
+  openai_plugin:
+    enabled: false
+    compatibility: reduced
+    status: assessed_not_active
+    advisory_only: true
+    blockers:
+      - critical_image_generation_not_guaranteed
+      - deterministic_file_pipeline_not_guaranteed
+      - persistent_delivery_state_not_guaranteed
+    assessment: docs/openai-plugin-compatibility.md
+
+capabilities:
+  critical:
+    - image_generation
+    - code_interpreter_and_data_analysis
+  important:
+    - image_upload_and_analysis
+    - structured_asset_contracts
+    - deterministic_file_validation
+    - cumulative_zip_delivery
+    - web_research_optional
+
+release:
+  version_file: VERSION
+  preserve_current_version: true
+  current_version: 1.0.0-rc2
+  publication_status: private_until_preflight
+  manual_preview_tests:
+    manifest: tests/TEST-MANIFEST.yaml
+    expected_status: notRun
+    migration_may_mark_pass: false

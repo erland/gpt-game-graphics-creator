@@ -1,0 +1,184 @@
+schema_version: 1
+project:
+  id: game-graphics-creator
+  name: Game Graphics Creator
+  version: 1.0.0-rc2
+
+migration:
+  target_builder_version: 1.5.0
+  strategy: behavior_preserving
+  plan: docs/gpt-builder-1.5-runtime-migration.md
+  total_steps: 7
+
+progress:
+  current_step: 7
+  last_completed_step: 7
+  completed_steps:
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+    - 6
+    - 7
+  skipped_steps: []
+  inserted_steps: []
+
+state:
+  overall: pass
+  blocking_issues: []
+  warnings:
+    - "Claude, OpenCode och OpenAI Plugin är ännu inte compatibility-bedömda och är därför inte aktiva."
+
+preservation:
+  legacy_instruction: builder/MAIN-INSTRUCTION.md
+  canonical_instruction: assistant/instructions.md
+  legacy_instruction_byte_identical: true
+  version_file: VERSION
+  preserve_version_1_0_0_rc2: true
+  preserve_knowledge_13_of_13: true
+  preserve_image_generation_required: true
+  preserve_code_interpreter_required: true
+  preserve_actual_file_measurement_rule: true
+  preserve_cumulative_zip_workflow: true
+  preserve_existing_contracts_fixtures_tests: true
+  preserve_manual_preview_not_run: true
+  preserve_private_until_preflight: true
+
+manual_preflight:
+  manifest: tests/TEST-MANIFEST.yaml
+  tests:
+    - G01
+    - G02
+    - G03
+    - G04
+    - G05
+    - G06
+    - G07
+    - G08
+    - G09
+    - G10
+    - G11
+    - G12
+    - G13
+    - G14
+    - G15
+    - G16
+  expected_status: notRun
+  migration_may_mark_pass: false
+  publication_status: privateUntilPreflight
+  migration_may_publish: false
+
+gpt_builder_1_5:
+  normalized_contract: gpt-builder-1.5-contract.yaml
+  validation: scripts/validate_gpt_builder_1_5_contract.py
+  canonical_instruction: assistant/instructions.md
+  legacy_instruction_byte_identical: true
+  image_generation_required: true
+  code_interpreter_data_analysis_required: true
+  actual_file_measurement_required: true
+  cumulative_zip_source_of_truth_preserved: true
+  knowledge_13_of_13_preserved: true
+  manual_preview_g01_g16_not_run_preserved: true
+  publication_private_until_preflight_preserved: true
+  version_1_0_0_rc2_preserved: true
+  status: passed
+
+chat_custom_normalization:
+  status: passed
+  canonical_instruction_source: assistant/instructions.md
+  custom_gpt_packaging_path: builder/MAIN-INSTRUCTION.md
+  chat_instruction_path: assistant/instructions.md
+  both_built_from_same_canonical_source: true
+  knowledge_13_of_13_in_both: true
+  critical_image_generation_marker_verified: true
+  critical_code_interpreter_marker_verified: true
+  actual_file_measurement_rule_verified: true
+  manual_preview_not_run_preserved: true
+  version_1_0_0_rc2_preserved: true
+
+runtime_baseline:
+  active:
+    - chat
+    - custom-gpt
+  inactive:
+    claude:
+      compatibility: reduced
+      blocker: critical_visual_and_file_pipeline_not_guaranteed
+      assessment: docs/claude-opencode-compatibility.md
+    opencode:
+      compatibility: reduced
+      blocker: critical_image_generation_not_guaranteed
+      assessment: docs/claude-opencode-compatibility.md
+  inactive:
+    openai_plugin:
+      status: assessed_not_active
+      compatibility: reduced
+      advisory_only: true
+      assessment: docs/openai-plugin-compatibility.md
+      blockers:
+        - critical_image_generation_not_guaranteed
+        - deterministic_file_pipeline_not_guaranteed
+        - persistent_delivery_state_not_guaranteed
+
+claude_opencode_assessment:
+  status: passed
+  assessment: docs/claude-opencode-compatibility.md
+  canonical_behavior_changed: false
+  claude:
+    compatibility: reduced
+    activation: not_active
+    blocker: critical_visual_and_file_pipeline_not_guaranteed
+  opencode:
+    compatibility: reduced
+    activation: not_active
+    blocker: critical_image_generation_not_guaranteed
+
+plugin_assessment:
+  status: passed
+  runtime: openai_plugin
+  compatibility: reduced
+  activation: not_active
+  advisory_only: true
+  assessment: docs/openai-plugin-compatibility.md
+  blockers:
+    - critical_image_generation_not_guaranteed
+    - deterministic_file_pipeline_not_guaranteed
+    - persistent_delivery_state_not_guaranteed
+  canonical_behavior_changed: false
+
+runtime_registry:
+  source_of_truth: runtime-distribution-registry.yaml
+  validation: scripts/validate_runtime_distribution_registry.py
+  active_targets:
+    - chat
+    - custom-gpt
+  exact_artifact_set: true
+  wildcard_runtime_selection: false
+  build_targets_derived_from_registry: true
+  validation_targets_derived_from_registry: true
+
+final_readiness:
+  status: ready_for_merge_after_ci
+  migration_steps_complete: 7
+  migration_steps_total: 7
+  final_gate: scripts/validate_gpt_builder_1_5_migration.py
+  canonical_behavior_preserved: true
+  version_1_0_0_rc2_preserved: true
+  knowledge_13_of_13_preserved: true
+  manual_preview_g01_g16_not_run_preserved: true
+  publication_private_until_preflight_preserved: true
+  active_targets:
+    - chat
+    - custom-gpt
+  inactive_targets:
+    - claude
+    - opencode
+    - openai_plugin
+
+next_step:
+  recommended: null
+  title: Migration complete
+  reason: "GPT Byggaren 1.5.0-migreringen är 7/7 komplett. Manuella Preview-tester och eventuell publicering är separata produktsteg och har inte ändrats av migreringen."
+
+human_readable_status: "Steg 1–7 av 7 i GPT Byggaren 1.5.0-migreringen är klara. Väntar endast på grön slut-CI för merge-readiness."

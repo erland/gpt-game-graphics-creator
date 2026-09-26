@@ -44,3 +44,12 @@ Use this checklist for each cumulative GPT package release.
 - [ ] Structural checks rerun against fresh extraction.
 - [ ] Final filename clearly identifies stage and version.
 - [ ] Remaining external or manual checks documented.
+
+## GPT Byggaren 1.5.0
+
+Före merge/release ska följande vara sant:
+- `scripts/validate_gpt_builder_1_5_migration.py` passerar.
+- `runtime-distribution-registry.yaml` listar endast Chat och Custom GPT som aktiva targets.
+- G01–G16 har inte ändrats från `notRun` av migreringen.
+- `privateUntilPreflight` är oförändrat tills manuella Preview-tester faktiskt har genomförts och accepterats.
+- VERSION är fortsatt `1.0.0-rc2` under migreringen.
