@@ -41,7 +41,14 @@ runtime:
     assessment: docs/claude-opencode-compatibility.md
   openai_plugin:
     enabled: false
-    compatibility: assessment_pending
+    compatibility: reduced
+    status: assessed_not_active
+    advisory_only: true
+    blockers:
+      - critical_image_generation_not_guaranteed
+      - deterministic_file_pipeline_not_guaranteed
+      - persistent_delivery_state_not_guaranteed
+    assessment: docs/openai-plugin-compatibility.md
 
 capabilities:
   critical:
