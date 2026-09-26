@@ -61,3 +61,15 @@ python3 scripts/validate_distributions.py
 ```
 
 Push, pull-request and manual runs use `VERSION`. A published GitHub Release uses its `v<semver>` tag as the package version and attaches both ZIP files to the release.
+
+## GPT Byggaren 1.5.0
+
+Migreringen är **7/7 komplett**. Canonical instruktion finns i `assistant/instructions.md`; `builder/MAIN-INSTRUCTION.md` behålls som legacy-kompatibel paketeringsyta. Build, validering och release-set härleds från `runtime-distribution-registry.yaml`.
+
+Bevarade release-gates:
+- version `1.0.0-rc2`
+- 13/13 permanenta Knowledge-filer
+- G01–G16 kvar som `notRun`
+- publicering fortsatt blockerad av `privateUntilPreflight`
+
+Aktiva runtimes är Chat och Custom GPT. Claude Projects, OpenCode och OpenAI Plugin är compatibility-bedömda men inte aktiva distributionsmål.
