@@ -43,7 +43,7 @@ def main(v):
     cptree(ROOT/'contract',custom/'contract')
     (custom/'VERSION').write_text(v+'\n',encoding='utf-8')
     # Portable chat
-    cp(ROOT/'portable/START-HERE.md',chat/'START-HERE.md'); cp(ROOT/'builder/MAIN-INSTRUCTION.md',chat/'assistant/instructions.md'); cp(ROOT/'builder/CONVERSATION-STARTERS.md',chat/'assistant/conversation-starters.md'); cp(ROOT/'builder/DESCRIPTION.md',chat/'assistant/description.md'); cp(ROOT/'builder/CAPABILITIES.md',chat/'assistant/capabilities.md')
+    cp(ROOT/'portable/START-HERE.md',chat/'START-HERE.md'); cp(ROOT/'assistant/instructions.md',chat/'assistant/instructions.md'); cp(ROOT/'builder/CONVERSATION-STARTERS.md',chat/'assistant/conversation-starters.md'); cp(ROOT/'builder/DESCRIPTION.md',chat/'assistant/description.md'); cp(ROOT/'builder/CAPABILITIES.md',chat/'assistant/capabilities.md')
     for f in fs: cp(ROOT/'knowledge'/f,chat/'knowledge'/f)
     cptree(ROOT/'contract',chat/'supporting/contract')
     (chat/'VERSION').write_text(v+'\n',encoding='utf-8')
