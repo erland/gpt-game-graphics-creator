@@ -67,7 +67,7 @@ def main() -> int:
         errors.append("manual preflight must remain required before publication")
     if preflight["publication_status"]!="privateUntilPreflight":
         errors.append("publication status must remain privateUntilPreflight")
-    if preflight["migration_may_mark_pass"] is not False:
+    if preflight["expected_tests"]["migration_may_mark_pass"] is not False:
         errors.append("migration may not mark Preview tests as pass")
     if preflight["migration_may_publish"] is not False:
         errors.append("migration may not publish the GPT")
