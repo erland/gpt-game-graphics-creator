@@ -1,0 +1,136 @@
+schema_version: 1
+builder:
+  target_version: 1.5.0
+  strategy: normalize_existing_canonical_contract
+  behavior_preserving: true
+
+canonical:
+  project_contract: gpt-project.yaml
+  instruction: assistant/instructions.md
+  legacy_instruction: builder/MAIN-INSTRUCTION.md
+  version_file: VERSION
+  knowledge_manifest: builder/UPLOAD-MANIFEST.md
+  manual_preview_manifest: tests/TEST-MANIFEST.yaml
+
+contracts:
+  capabilities:
+    critical:
+      - image_generation
+      - code_interpreter_and_data_analysis
+    required:
+      - image_upload_and_analysis
+      - asset_request_delivery_contract
+      - deterministic_file_measurement
+      - deterministic_post_processing
+      - deterministic_sheet_assembly
+      - manifest_generation
+      - validation_evidence
+      - cumulative_zip_delivery
+    optional:
+      - web_research
+
+  artifacts:
+    required:
+      visual_source_asset:
+        generation_tool: image_generation
+        technical_validity_requires_inspection: true
+      runtime_asset:
+        exact_dimensions_may_be_claimed_without_measurement: false
+        exact_alpha_may_be_claimed_without_inspection: false
+      asset_manifest:
+        format:
+          - yaml
+          - markdown
+      validation_report:
+        statuses:
+          - Passed
+          - Failed
+          - Not verified
+          - Not applicable
+      delivery_bundle:
+        format: zip
+        authority: latest_complete_approved_archive
+        overwrite_original: false
+
+  state:
+    authority:
+      active_delivery: latest_complete_approved_archive
+      asset_contract: current_brief_spec_manifest_validation
+    conversation_only_authority_for_long_work: false
+    preserve_approved_assets_when_possible: true
+    manual_preview_state_source: tests/TEST-MANIFEST.yaml
+
+  tools:
+    required:
+      - id: image-generation
+        purpose: visual_creation_and_editing
+      - id: code-interpreter-data-analysis
+        purpose:
+          - file_measurement
+          - alpha_inspection
+          - crop_pad_normalize
+          - anchor_alignment
+          - deterministic_sheet_assembly
+          - manifest_generation
+          - validation
+          - zip_packaging
+    conditional:
+      - id: web
+        purpose: current_external_reference_research
+
+behavior:
+  separate_visual_quality_from_technical_validity: true
+  exact_file_properties_require_actual_measurement: true
+  no_false_runtime_integration_claims: true
+  preserve_approved_work_when_possible: true
+  cumulative_zip_source_of_truth: true
+  original_zip_must_not_be_overwritten: true
+
+manual_preflight:
+  required_before_publication: true
+  publication_status: privateUntilPreflight
+  migration_may_publish: false
+  expected_tests:
+    count: 16
+    ids:
+      - G01
+      - G02
+      - G03
+      - G04
+      - G05
+      - G06
+      - G07
+      - G08
+      - G09
+      - G10
+      - G11
+      - G12
+      - G13
+      - G14
+      - G15
+      - G16
+    migration_expected_status: notRun
+    migration_may_mark_pass: false
+
+knowledge:
+  expected_files: 13
+  upload_manifest: builder/UPLOAD-MANIFEST.md
+
+release_policy:
+  current_version: 1.0.0-rc2
+  preserve_version_during_migration: true
+  stable_or_public_release_requires_manual_preflight: true
+
+runtime_policy:
+  active:
+    chat:
+      compatibility: equivalent_runtime_dependent
+    custom-gpt:
+      compatibility: equivalent_with_platform_constraints
+  assessment_pending:
+    claude:
+      compatibility: assessment_pending
+    opencode:
+      compatibility: assessment_pending
+    openai_plugin:
+      compatibility: assessment_pending
