@@ -1,0 +1,80 @@
+schema_version: 1
+project:
+  id: game-graphics-creator
+  name: Game Graphics Creator
+  version: 1.0.0-rc2
+
+migration:
+  target_builder_version: 1.5.0
+  strategy: behavior_preserving
+  plan: docs/gpt-builder-1.5-runtime-migration.md
+  total_steps: 7
+
+progress:
+  current_step: 2
+  last_completed_step: 1
+  completed_steps:
+    - 1
+  skipped_steps: []
+  inserted_steps: []
+
+state:
+  overall: pass
+  blocking_issues: []
+  warnings:
+    - "Claude, OpenCode och OpenAI Plugin är ännu inte compatibility-bedömda och är därför inte aktiva."
+
+preservation:
+  legacy_instruction: builder/MAIN-INSTRUCTION.md
+  canonical_instruction: assistant/instructions.md
+  legacy_instruction_byte_identical: true
+  version_file: VERSION
+  preserve_version_1_0_0_rc2: true
+  preserve_knowledge_13_of_13: true
+  preserve_image_generation_required: true
+  preserve_code_interpreter_required: true
+  preserve_actual_file_measurement_rule: true
+  preserve_cumulative_zip_workflow: true
+  preserve_existing_contracts_fixtures_tests: true
+  preserve_manual_preview_not_run: true
+  preserve_private_until_preflight: true
+
+manual_preflight:
+  manifest: tests/TEST-MANIFEST.yaml
+  tests:
+    - G01
+    - G02
+    - G03
+    - G04
+    - G05
+    - G06
+    - G07
+    - G08
+    - G09
+    - G10
+    - G11
+    - G12
+    - G13
+    - G14
+    - G15
+    - G16
+  expected_status: notRun
+  migration_may_mark_pass: false
+  publication_status: privateUntilPreflight
+  migration_may_publish: false
+
+runtime_baseline:
+  active:
+    - chat
+    - custom-gpt
+  assessment_pending:
+    - claude
+    - opencode
+    - openai_plugin
+
+next_step:
+  recommended: 2
+  title: Normalisera GPT Byggaren 1.5-kontrakten
+  reason: "Baseline, manual preflight och canonical instruktion är nu låsta utan beteendeförändring."
+
+human_readable_status: "Steg 1 av 7 i GPT Byggaren 1.5.0-migreringen är klart."
