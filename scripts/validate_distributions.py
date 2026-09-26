@@ -17,16 +17,36 @@ def main(v):
         with zipfile.ZipFile(x) as z:
             if z.testzip(): raise SystemExit(f'Korrupt zip: {x.name}')
     with zipfile.ZipFile(c) as z:
-        for rel in ['builder/MAIN-INSTRUCTION.md','builder/CONVERSATION-STARTERS.md']:
-            if rd(z,rel)!=(ROOT/rel).read_bytes(): raise SystemExit(f'Custom avviker: {rel}')
+        if rd(z,'builder/MAIN-INSTRUCTION.md')!=(ROOT/'assistant/instructions.md').read_bytes():
+            raise SystemExit('Custom instruktion avviker från canonical källa')
+        if rd(z,'builder/CONVERSATION-STARTERS.md')!=(ROOT/'builder/CONVERSATION-STARTERS.md').read_bytes():
+            raise SystemExit('Custom starters avviker')
         for f in kfiles():
             if rd(z,'knowledge/'+f)!=(ROOT/'knowledge'/f).read_bytes(): raise SystemExit(f'Custom Knowledge avviker: {f}')
         if rd(z,'VERSION').decode().strip()!=v: raise SystemExit('Fel VERSION i custom')
+        custom_instr=rd(z,'builder/MAIN-INSTRUCTION.md').decode('utf-8')
+        for marker in [
+            'Separate visual quality from technical validity.',
+            'Measure actual files.',
+            'Use image generation for visual creation or editing and Code Interpreter & Data Analysis for measurable file operations',
+            'Never claim that a capability ran when it was unavailable or not used.',
+        ]:
+            if marker not in custom_instr:
+                raise SystemExit(f'Custom GPT saknar kritisk beteendemarkör: {marker}')
     with zipfile.ZipFile(p) as z:
-        if rd(z,'assistant/instructions.md')!=(ROOT/'builder/MAIN-INSTRUCTION.md').read_bytes(): raise SystemExit('Portable instruktion avviker')
+        if rd(z,'assistant/instructions.md')!=(ROOT/'assistant/instructions.md').read_bytes(): raise SystemExit('Portable instruktion avviker från canonical källa')
         if rd(z,'assistant/conversation-starters.md')!=(ROOT/'builder/CONVERSATION-STARTERS.md').read_bytes(): raise SystemExit('Portable starters avviker')
         for f in kfiles():
             if rd(z,'knowledge/'+f)!=(ROOT/'knowledge'/f).read_bytes(): raise SystemExit(f'Portable Knowledge avviker: {f}')
+        chat_instr=rd(z,'assistant/instructions.md').decode('utf-8')
+        for marker in [
+            'Separate visual quality from technical validity.',
+            'Measure actual files.',
+            'Use image generation for visual creation or editing and Code Interpreter & Data Analysis for measurable file operations',
+            'Never claim that a capability ran when it was unavailable or not used.',
+        ]:
+            if marker not in chat_instr:
+                raise SystemExit(f'Chat saknar kritisk beteendemarkör: {marker}')
         m=json.loads(rd(z,'MANIFEST.json')); 
         if m['version']!=v or m['knowledge_count']!=13: raise SystemExit('Fel portable manifest')
         for n,h in m['files'].items():
