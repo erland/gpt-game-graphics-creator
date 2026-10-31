@@ -3,7 +3,7 @@ import json
 import unittest
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[3]
 DOCS = ROOT / "tests"
 FIXTURE = Path(__file__).with_name("remaining-test-cases.json")
 EXPECTED = {"G03","G04","G05","G06","G07","G08","G09","G10","G13","G14","G15"}
