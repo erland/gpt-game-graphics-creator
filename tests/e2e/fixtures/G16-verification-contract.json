@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "test": "G16",
+  "contract_scope": "fixture_verification_only",
+  "upgrade": {
+    "from": "0.1.0",
+    "to": "0.2.0",
+    "production_mode": "visualUpgrade",
+    "target_maturity": "productionCandidate"
+  },
+  "locked": {
+    "asset_ids": [
+      "ground-01",
+      "prop-01"
+    ],
+    "fields": [
+      "projection",
+      "footprint",
+      "anchor",
+      "scale",
+      "atlas_slot",
+      "canvas_dimensions"
+    ]
+  },
+  "visual_change_policy": {
+    "status": "NOT_VERIFIED",
+    "reason": "No approved visual change whitelist or human visual signoff supplied",
+    "requires_approval": true
+  },
+  "animation": {
+    "declaration_status": "NOT_DECLARED",
+    "preservation_status": "NOT_VERIFIED",
+    "required_fields_if_applicable": [
+      "states",
+      "directions",
+      "frame_count",
+      "frame_order",
+      "fps",
+      "looping"
+    ],
+    "decision": "Obtain authoritative baseline or explicitly mark not applicable; do not infer"
+  },
+  "localization": {
+    "declaration_status": "NOT_DECLARED",
+    "preservation_status": "NOT_VERIFIED",
+    "required_fields_if_applicable": [
+      "text_policy",
+      "locale_variants",
+      "text_safe_area"
+    ],
+    "decision": "Obtain authoritative baseline or explicitly mark not applicable; do not infer"
+  },
+  "external": {
+    "visual_approval": "NOT_VERIFIED",
+    "game_engine_integration": "NOT_VERIFIED",
+    "independent_plugin_runtime": "NOT_VERIFIED"
+  },
+  "release_rule": "Production Candidate only; do not infer Production Ready"
+}
