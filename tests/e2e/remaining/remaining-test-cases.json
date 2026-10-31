@@ -1,0 +1,169 @@
+{
+  "schema_version": 1,
+  "kind": "test_scenarios_not_executed",
+  "host": "ChatGPT Chat with Game Graphics Creator Skills",
+  "status": "NOT_RUN",
+  "cases": [
+    {
+      "id": "G10",
+      "priority": 1,
+      "title": "Reject presentation sheet",
+      "fixture_type": "metadata + negative PNG fixture",
+      "prompt": "Perform G10 (Reject presentation sheet) on deliberately synthetic test data. Reject a contact sheet with captions and guides as runtime tileset; request deterministic clean extraction. Produce actual artifacts if required, do not invent missing inputs, and report PASS/FAIL/NOT_VERIFIED with evidence.",
+      "expected_behavior": "Reject a contact sheet with captions and guides as runtime tileset; request deterministic clean extraction",
+      "assertion_tags": [
+        "presentation-only",
+        "runtime-export-rejected"
+      ],
+      "automation_scope": "Automated pixel/layout check plus host refusal",
+      "manual_or_external_check": "Human confirmation of classification",
+      "result": "NOT_RUN"
+    },
+    {
+      "id": "G15",
+      "priority": 1,
+      "title": "Honest external verification",
+      "fixture_type": "JSON-only explicit external checks",
+      "prompt": "Perform G15 (Honest external verification) on deliberately synthetic test data. SpriteKit load, collision, tvOS readability and device validation must remain NOT_VERIFIED without evidence. Produce actual artifacts if required, do not invent missing inputs, and report PASS/FAIL/NOT_VERIFIED with evidence.",
+      "expected_behavior": "SpriteKit load, collision, tvOS readability and device validation must remain NOT_VERIFIED without evidence",
+      "assertion_tags": [
+        "NOT_VERIFIED"
+      ],
+      "automation_scope": "Automated assertions and host transcript review",
+      "manual_or_external_check": "Independent engine/device checks",
+      "result": "NOT_RUN"
+    },
+    {
+      "id": "G03",
+      "priority": 1,
+      "title": "Props with differing canvas heights",
+      "fixture_type": "RGBA PNG and manifest",
+      "prompt": "Perform G03 (Props with differing canvas heights) on deliberately synthetic test data. Keep 1x1 footprint with 64x96 and 64x128 canvas examples; anchors explicit. Produce actual artifacts if required, do not invent missing inputs, and report PASS/FAIL/NOT_VERIFIED with evidence.",
+      "expected_behavior": "Keep 1x1 footprint with 64x96 and 64x128 canvas examples; anchors explicit",
+      "assertion_tags": [
+        "footprint-stable",
+        "canvas-distinct"
+      ],
+      "automation_scope": "Automate dimensions, footprint, anchor validation",
+      "manual_or_external_check": "Visual scene fit",
+      "result": "NOT_RUN"
+    },
+    {
+      "id": "G04",
+      "priority": 1,
+      "title": "Multi-tile structures",
+      "fixture_type": "JSON layout and regional atlas mapping",
+      "prompt": "Perform G04 (Multi-tile structures) on deliberately synthetic test data. Declare 2x2 logical footprint, origin, anchor, nonoverlapping atlas regions. Produce actual artifacts if required, do not invent missing inputs, and report PASS/FAIL/NOT_VERIFIED with evidence.",
+      "expected_behavior": "Declare 2x2 logical footprint, origin, anchor, nonoverlapping atlas regions",
+      "assertion_tags": [
+        "footprint-2x2",
+        "regions-declared"
+      ],
+      "automation_scope": "Automate region rectangles / occupancy; host review",
+      "manual_or_external_check": "Gameplay collision and rendering",
+      "result": "NOT_RUN"
+    },
+    {
+      "id": "G05",
+      "priority": 1,
+      "title": "Static tiles vs animated effects",
+      "fixture_type": "Two incompatible layout manifests",
+      "prompt": "Perform G05 (Static tiles vs animated effects) on deliberately synthetic test data. Do not place 128x64 tile and 32x32x4 animation under a shared undeclared slicing grid. Produce actual artifacts if required, do not invent missing inputs, and report PASS/FAIL/NOT_VERIFIED with evidence.",
+      "expected_behavior": "Do not place 128x64 tile and 32x32x4 animation under a shared undeclared slicing grid",
+      "assertion_tags": [
+        "separate-layout"
+      ],
+      "automation_scope": "Automate separate atlas grouping or reject mixed sheet",
+      "manual_or_external_check": "Art review",
+      "result": "NOT_RUN"
+    },
+    {
+      "id": "G13",
+      "priority": 1,
+      "title": "Swedish chat, English docs",
+      "fixture_type": "Swedish prompt and English filename policy",
+      "prompt": "Perform G13 (Swedish chat, English docs) on deliberately synthetic test data. Answer in Swedish, keep filenames, identifiers and technical docs English. Produce actual artifacts if required, do not invent missing inputs, and report PASS/FAIL/NOT_VERIFIED with evidence.",
+      "expected_behavior": "Answer in Swedish, keep filenames, identifiers and technical docs English",
+      "assertion_tags": [
+        "swedish-chat",
+        "english-contract"
+      ],
+      "automation_scope": "Transcript inspection and schema language guard",
+      "manual_or_external_check": "Native speaker review",
+      "result": "NOT_RUN"
+    },
+    {
+      "id": "G06",
+      "priority": 2,
+      "title": "Character directions/states",
+      "fixture_type": "Direction-state-frame matrix JSON",
+      "prompt": "Perform G06 (Character directions/states) on deliberately synthetic test data. Two states and four directions, two frames each; reject one missing frame. Produce actual artifacts if required, do not invent missing inputs, and report PASS/FAIL/NOT_VERIFIED with evidence.",
+      "expected_behavior": "Two states and four directions, two frames each; reject one missing frame",
+      "assertion_tags": [
+        "complete-matrix"
+      ],
+      "automation_scope": "Automate cardinality, file existence and foot points; host identity check",
+      "manual_or_external_check": "Appearance/identity across frames",
+      "result": "NOT_RUN"
+    },
+    {
+      "id": "G07",
+      "priority": 2,
+      "title": "Animation consistency",
+      "fixture_type": "Animation timing and frame metadata",
+      "prompt": "Perform G07 (Animation consistency) on deliberately synthetic test data. Preserve frame order, declared 8 fps, loop=true, and common anchor. Produce actual artifacts if required, do not invent missing inputs, and report PASS/FAIL/NOT_VERIFIED with evidence.",
+      "expected_behavior": "Preserve frame order, declared 8 fps, loop=true, and common anchor",
+      "assertion_tags": [
+        "frame-order",
+        "timing"
+      ],
+      "automation_scope": "Automate clip bounds, anchor, order, fps and looping declaration",
+      "manual_or_external_check": "Actual playback / visible motion",
+      "result": "NOT_RUN"
+    },
+    {
+      "id": "G08",
+      "priority": 2,
+      "title": "Transparent UI icons",
+      "fixture_type": "Transparent PNG and text rules",
+      "prompt": "Perform G08 (Transparent UI icons) on deliberately synthetic test data. UI artwork must remain transparent and contain no baked-in localizable labels. Produce actual artifacts if required, do not invent missing inputs, and report PASS/FAIL/NOT_VERIFIED with evidence.",
+      "expected_behavior": "UI artwork must remain transparent and contain no baked-in localizable labels",
+      "assertion_tags": [
+        "transparent",
+        "text-free"
+      ],
+      "automation_scope": "Automate RGBA/alpha; manual symbol inspection",
+      "manual_or_external_check": "Icon legibility/meaning",
+      "result": "NOT_RUN"
+    },
+    {
+      "id": "G14",
+      "priority": 2,
+      "title": "Localized Swedish game text",
+      "fixture_type": "Layer contract JSON",
+      "prompt": "Perform G14 (Localized Swedish game text) on deliberately synthetic test data. Base artwork text-free, Swedish text in dedicated locale layer only. Produce actual artifacts if required, do not invent missing inputs, and report PASS/FAIL/NOT_VERIFIED with evidence.",
+      "expected_behavior": "Base artwork text-free, Swedish text in dedicated locale layer only",
+      "assertion_tags": [
+        "separate-text-layer"
+      ],
+      "automation_scope": "Automate separate artwork/text-layer files and locale manifest",
+      "manual_or_external_check": "Visual language rendering",
+      "result": "NOT_RUN"
+    },
+    {
+      "id": "G09",
+      "priority": 3,
+      "title": "Parallax layers",
+      "fixture_type": "Layer sizes and seam specification",
+      "prompt": "Perform G09 (Parallax layers) on deliberately synthetic test data. Three separately exported layers with declared loop policy and camera assumptions. Produce actual artifacts if required, do not invent missing inputs, and report PASS/FAIL/NOT_VERIFIED with evidence.",
+      "expected_behavior": "Three separately exported layers with declared loop policy and camera assumptions",
+      "assertion_tags": [
+        "layer-separation",
+        "seam-evidence"
+      ],
+      "automation_scope": "Automate width/height, layer separation and edge comparison",
+      "manual_or_external_check": "Actual parallax camera integration",
+      "result": "NOT_RUN"
+    }
+  ]
+}
