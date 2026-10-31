@@ -1,0 +1,231 @@
+{
+  "scope": "STATIC_ONLY_NOT_A_RUNTIME_TEST",
+  "source_files": [
+    "canonical/core.md",
+    "canonical/skills/graphics-creation/behavior.md",
+    "canonical/skills/asset-production/behavior.md"
+  ],
+  "cases": {
+    "G01": {
+      "test_file": true,
+      "static_contract_terms": [
+        "design sheet",
+        "production ready"
+      ],
+      "missing_terms": [],
+      "static_status": "supported",
+      "host_execution": "not_run",
+      "functional_result": "not_verified"
+    },
+    "G02": {
+      "test_file": true,
+      "static_contract_terms": [
+        "128",
+        "64",
+        "tile"
+      ],
+      "missing_terms": [
+        "128",
+        "64"
+      ],
+      "static_status": "review_required",
+      "host_execution": "not_run",
+      "functional_result": "not_verified"
+    },
+    "G03": {
+      "test_file": true,
+      "static_contract_terms": [
+        "footprint",
+        "anchor",
+        "canvas"
+      ],
+      "missing_terms": [],
+      "static_status": "supported",
+      "host_execution": "not_run",
+      "functional_result": "not_verified"
+    },
+    "G04": {
+      "test_file": true,
+      "static_contract_terms": [
+        "footprint",
+        "manifest",
+        "anchor"
+      ],
+      "missing_terms": [],
+      "static_status": "supported",
+      "host_execution": "not_run",
+      "functional_result": "not_verified"
+    },
+    "G05": {
+      "test_file": true,
+      "static_contract_terms": [
+        "incompatible",
+        "slicing"
+      ],
+      "missing_terms": [],
+      "static_status": "supported",
+      "host_execution": "not_run",
+      "functional_result": "not_verified"
+    },
+    "G06": {
+      "test_file": true,
+      "static_contract_terms": [
+        "directions",
+        "frame",
+        "foot point"
+      ],
+      "missing_terms": [],
+      "static_status": "supported",
+      "host_execution": "not_run",
+      "functional_result": "not_verified"
+    },
+    "G07": {
+      "test_file": true,
+      "static_contract_terms": [
+        "frame order",
+        "fps",
+        "looping"
+      ],
+      "missing_terms": [],
+      "static_status": "supported",
+      "host_execution": "not_run",
+      "functional_result": "not_verified"
+    },
+    "G08": {
+      "test_file": true,
+      "static_contract_terms": [
+        "alpha",
+        "localization"
+      ],
+      "missing_terms": [],
+      "static_status": "supported",
+      "host_execution": "not_run",
+      "functional_result": "not_verified"
+    },
+    "G09": {
+      "test_file": true,
+      "static_contract_terms": [
+        "layer",
+        "camera"
+      ],
+      "missing_terms": [],
+      "static_status": "supported",
+      "host_execution": "not_run",
+      "functional_result": "not_verified"
+    },
+    "G10": {
+      "test_file": true,
+      "static_contract_terms": [
+        "design sheet",
+        "deterministic"
+      ],
+      "missing_terms": [],
+      "static_status": "supported",
+      "host_execution": "not_run",
+      "functional_result": "not_verified"
+    },
+    "G11": {
+      "test_file": true,
+      "static_contract_terms": [
+        "spacing",
+        "margin",
+        "deterministic"
+      ],
+      "missing_terms": [],
+      "static_status": "supported",
+      "host_execution": "not_run",
+      "functional_result": "not_verified"
+    },
+    "G12": {
+      "test_file": true,
+      "static_contract_terms": [
+        "revis",
+        "approved",
+        "version"
+      ],
+      "missing_terms": [],
+      "static_status": "supported",
+      "host_execution": "not_run",
+      "functional_result": "not_verified"
+    },
+    "G13": {
+      "test_file": true,
+      "static_contract_terms": [
+        "swedish",
+        "english"
+      ],
+      "missing_terms": [
+        "swedish"
+      ],
+      "static_status": "review_required",
+      "host_execution": "not_run",
+      "functional_result": "not_verified"
+    },
+    "G14": {
+      "test_file": true,
+      "static_contract_terms": [
+        "localiz",
+        "text"
+      ],
+      "missing_terms": [],
+      "static_status": "supported",
+      "host_execution": "not_run",
+      "functional_result": "not_verified"
+    },
+    "G15": {
+      "test_file": true,
+      "static_contract_terms": [
+        "not verified",
+        "external"
+      ],
+      "missing_terms": [],
+      "static_status": "supported",
+      "host_execution": "not_run",
+      "functional_result": "not_verified"
+    },
+    "G16": {
+      "test_file": true,
+      "static_contract_terms": [
+        "visual upgrade",
+        "projection",
+        "anchor"
+      ],
+      "missing_terms": [],
+      "static_status": "supported",
+      "host_execution": "not_run",
+      "functional_result": "not_verified"
+    }
+  },
+  "archives": {
+    "game-graphics-creator-chat-1.0.0-rc2.zip": {
+      "sha256": "851bf8b64dad7a50a71879d96703504bd010e034005df94d8e80bef1a63818af",
+      "integrity": "PASS",
+      "files": 49
+    },
+    "game-graphics-creator-claude-project-1.0.0-rc2.zip": {
+      "sha256": "683ffaa9933dfbcfb178c3bea7aa7f5019bde81bbc529bd66770b851d09740de",
+      "integrity": "PASS",
+      "files": 19
+    },
+    "game-graphics-creator-claude-skills-1.0.0-rc2.zip": {
+      "sha256": "890a9e58072b793aa3fa836e3a050d5c617a16e78ad6d28b381d3a5fc7b99f16",
+      "integrity": "PASS",
+      "files": 20
+    },
+    "game-graphics-creator-opencode-1.0.0-rc2.zip": {
+      "sha256": "de3df5eb7c038e7f6a2af9b4a2c5e2b65c9267b69318014de3bb20e0e8f35839",
+      "integrity": "PASS",
+      "files": 36
+    },
+    "game-graphics-creator-plugin-1.0.0-rc2.zip": {
+      "sha256": "6a17ac021c1ed87307fa18c457c802642f0ccdac77cb028ccdd0eafdfa922c96",
+      "integrity": "PASS",
+      "files": 21
+    },
+    "game-graphics-creator-project-1.0.0-rc2.zip": {
+      "sha256": "e92c988e29f4a5a82b3c6adc0c90406945ea0af39a42f9bf37b10eb45d6bfc25",
+      "integrity": "PASS",
+      "files": 144
+    }
+  }
+}

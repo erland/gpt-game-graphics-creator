@@ -1,0 +1,37 @@
+schema_version: 1
+project:
+  id: game-graphics-creator
+  name: Game Graphics Creator
+plan:
+  path: docs/development-plan.md
+  total_steps: 6
+progress:
+  current_phase: final-verification
+  current_step: 6
+  last_completed_step: 5
+  completed_steps:
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+state:
+  overall: blocked
+  blocking_issues:
+  - Host-specific G01–G16 Preview tests not run
+  - Functional image generation and file-delivery pipeline not verified
+  - Disabled peer runtimes not host-validated
+  warnings:
+  - Modular Skill architecture deferred pending behavioral traceability review
+  - Historical duplicated Markdown templates retained
+next_step:
+  recommended: 6
+  title: Functional host verification and release readiness
+  reason: Packages pass; G01–G16 and image/file pipeline remain unverified
+resume:
+  supported: true
+  required_files:
+  - gpt-project.yaml
+  - assistant/instructions.md
+  - project-status.yaml
+  human_readable_status: STATUS.md

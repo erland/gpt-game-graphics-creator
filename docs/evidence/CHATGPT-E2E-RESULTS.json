@@ -1,0 +1,45 @@
+{
+  "scope": "HOST_E2E",
+  "cases": {
+    "G01": {
+      "status": "NOT_RUN",
+      "host": "ChatGPT Chat",
+      "input_fixture": "tests/e2e/fixtures/prototype-manifest.json",
+      "actual_output_files": [],
+      "transcript": null,
+      "human_review": null
+    },
+    "G02": {
+      "status": "NOT_RUN",
+      "host": "ChatGPT Chat",
+      "input_fixture": "tests/e2e/fixtures/prototype-manifest.json",
+      "actual_output_files": [],
+      "transcript": null,
+      "human_review": null
+    },
+    "G11": {
+      "status": "NOT_RUN",
+      "host": "ChatGPT Chat",
+      "input_fixture": "tests/e2e/fixtures/prototype-manifest.json",
+      "actual_output_files": [],
+      "transcript": null,
+      "human_review": null
+    },
+    "G12": {
+      "status": "NOT_RUN",
+      "host": "ChatGPT Chat",
+      "input_fixture": "tests/e2e/fixtures/prototype-manifest.json",
+      "actual_output_files": [],
+      "transcript": null,
+      "human_review": null
+    },
+    "G16": {
+      "status": "NOT_RUN",
+      "host": "ChatGPT Chat",
+      "input_fixture": "tests/e2e/fixtures/prototype-manifest.json",
+      "actual_output_files": [],
+      "transcript": null,
+      "human_review": null
+    }
+  }
+}

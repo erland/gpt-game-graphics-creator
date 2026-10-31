@@ -1,0 +1,53 @@
+{
+  "sources": {
+    "core": "canonical/core.md",
+    "graphics-creation": "canonical/skills/graphics-creation/behavior.md",
+    "asset-production": "canonical/skills/asset-production/behavior.md"
+  },
+  "sections": [
+    {
+      "owner": "core",
+      "title": "Core mission"
+    },
+    {
+      "owner": "core",
+      "title": "Responsibility boundary"
+    },
+    {
+      "owner": "core",
+      "title": "Working principles"
+    },
+    {
+      "owner": "asset-production",
+      "title": "Default workflow"
+    },
+    {
+      "owner": "graphics-creation",
+      "title": "Prototype-to-production behavior"
+    },
+    {
+      "owner": "graphics-creation",
+      "title": "Asset-series behavior"
+    },
+    {
+      "owner": "asset-production",
+      "title": "Technical discipline"
+    },
+    {
+      "owner": "core",
+      "title": "Response behavior"
+    },
+    {
+      "owner": "core",
+      "title": "Capability use"
+    },
+    {
+      "owner": "core",
+      "title": "Current architecture stage"
+    },
+    {
+      "owner": "core",
+      "title": "Reference fixtures and tests"
+    }
+  ]
+}

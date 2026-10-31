@@ -1,0 +1,35 @@
+{
+  "atlas": "atlas-reference.png",
+  "canvas": [
+    272,
+    112
+  ],
+  "spacing": 8,
+  "margin": 8,
+  "cells": [
+    {
+      "id": "ground-01",
+      "file": "tile-upgrade.png",
+      "xy": [
+        8,
+        8
+      ],
+      "size": [
+        128,
+        64
+      ]
+    },
+    {
+      "id": "prop-01",
+      "file": "prop-upgrade.png",
+      "xy": [
+        144,
+        8
+      ],
+      "size": [
+        64,
+        96
+      ]
+    }
+  ]
+}

@@ -46,30 +46,25 @@ Before a release:
 
 `docs/RELEASE-CHECKLIST.md` contains the maintainer checklist.
 
-## Portable Chat and distribution builds
+## GPT Byggaren 1.6.33 — current build contract
 
-The repository builds two synchronized distributions from the current Builder configuration:
+The authoritative behavior is `assistant/instructions.md`; the original Builder materials and 13 Knowledge files remain unchanged. The source project version is `1.0.0-rc2`.
 
-- `game-graphics-creator-custom-gpt-vX.Y.Z.zip` — Builder configuration, 13 approved permanent Knowledge files, and contract schemas/templates.
-- `game-graphics-creator-chat-vX.Y.Z.zip` — portable package for a normal ChatGPT conversation, starting at `START-HERE.md`.
+**Built and package-validated:** ChatGPT Chat, Claude Projects, Claude Skills, OpenCode and OpenAI Plugin, plus project ZIP. **Not functionally host-verified:** image generation/editing, exact file processing, state, and delivery. Custom GPT remains historical, not a sixth active target. A package build does not establish host compatibility.
 
-Local build:
+Build using the installed, original engine 1.6.33 scripts (no replacement packager):
 
 ```bash
-python3 scripts/build_distributions.py
-python3 scripts/validate_distributions.py
+python3 scripts/build_distributions.py --project-root . --version "$(cat VERSION)"
+python3 scripts/validate_distributions.py --project-root .
 ```
 
-Push, pull-request and manual runs use `VERSION`. A published GitHub Release uses its `v<semver>` tag as the package version and attaches both ZIP files to the release.
+The pinned original engine is installed in project `scripts/` and `templates/`; the detached engine ZIP is not needed in CI. `gpt-project.yaml` controls enabled runtime targets. See `docs/STEP-4-DISTRIBUTION-VERIFICATION.md` for measured checks and `docs/STEP-5-HYGIENE-REPORT.md` for CI/legacy inventory.
 
-## GPT Byggaren 1.5.0
+## Release and functional verification
 
-Migreringen är **7/7 komplett**. Canonical instruktion finns i `assistant/instructions.md`; `builder/MAIN-INSTRUCTION.md` behålls som legacy-kompatibel paketeringsyta. Build, validering och release-set härleds från `runtime-distribution-registry.yaml`.
+G01–G16 remain unrun. Keep the project private and do not publish or activate other runtimes until relevant host-side graphics and asset-delivery tests have passed. CI checks source/package integrity only; it does not certify runtime behavior. A manual release decision and explicit functional evidence are required before attaching assets to any public release.
 
-Bevarade release-gates:
-- version `1.0.0-rc2`
-- 13/13 permanenta Knowledge-filer
-- G01–G16 kvar som `notRun`
-- publicering fortsatt blockerad av `privateUntilPreflight`
+## Historical migration
 
-Aktiva runtimes är Chat och Custom GPT. Claude Projects, OpenCode och OpenAI Plugin är compatibility-bedömda men inte aktiva distributionsmål.
+Older GPT Byggaren 1.5 files are retained for provenance, not the active build authority. Their historic conclusions must not be interpreted as 1.6.33 release approval.

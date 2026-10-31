@@ -1,74 +1,56 @@
-name: Build GPT distributions
+name: Validate GPT Byggaren 1.6.33 packages
 
 on:
   push:
   pull_request:
   workflow_dispatch:
-  release:
-    types: [published]
 
 permissions:
   contents: read
 
 jobs:
-  build:
-    outputs:
-      version: ${{ steps.version.outputs.version }}
+  validate-source-and-packages:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
     steps:
       - uses: actions/checkout@v4
-      - name: Resolve version
-        id: version
-        shell: bash
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Dependencies
+        run: python -m pip install PyYAML
+      - name: Verify pinned engine sources
         run: |
-          if [[ "${{ github.event_name }}" == "release" ]]; then
-            TAG='${{ github.event.release.tag_name }}'
-            if [[ ! "$TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.-]+)?(\+[0-9A-Za-z.-]+)?$ ]]; then
-              echo "Invalid release tag: $TAG (expected v<semver>)" >&2
-              exit 1
-            fi
-            VERSION="${TAG#v}"
-          else
-            VERSION="$(tr -d '[:space:]' < VERSION)"
-          fi
-          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
-      - name: Validate GPT Builder 1.5 canonical contract
-        run: python3 scripts/validate_gpt_builder_1_5_contract.py
-      - name: Validate Claude and OpenCode compatibility
-        run: python3 scripts/validate_claude_opencode_compatibility.py
-      - name: Validate OpenAI Plugin compatibility
-        run: python3 scripts/validate_openai_plugin_compatibility.py
-      - name: Validate runtime distribution registry
-        run: python3 scripts/validate_runtime_distribution_registry.py
-      - name: Final GPT Builder 1.5 migration gate
-        run: python3 scripts/validate_gpt_builder_1_5_migration.py
-      - name: Build distributions
-        run: python3 scripts/build_distributions.py --version "${{ steps.version.outputs.version }}"
-      - name: Validate distributions
-        run: python3 scripts/validate_distributions.py --version "${{ steps.version.outputs.version }}"
-      - name: Upload workflow artifacts
-        uses: actions/upload-artifact@v4
+          test -f scripts/build_distributions.py
+          test -f scripts/validate_distributions.py
+          test -f scripts/lib/project_model.py
+          test -f templates/START-HERE.chat.md.tpl
+          python - <<'PYCODE'
+          import yaml
+          c=yaml.safe_load(open('gpt-project.yaml',encoding='utf-8'))
+          assert c['runtime']['chat_zip']['enabled'] is True
+          for rt in ('claude','opencode','plugin','custom_gpt'):
+              assert c['runtime'][rt]['enabled'] is False, rt
+          assert c['release']['current_version']==open('VERSION').read().strip()
+          PYCODE
+      - name: Build enabled packages with installed original Engine 1.6.33
+        run: python scripts/build_distributions.py --project-root . --version "$(cat VERSION)"
+      - name: Validate generated distributions
+        run: python scripts/validate_distributions.py --project-root .
+      - name: Verify all five package targets
+        run: |
+          python - <<'PYCODE'
+          import pathlib,zipfile
+          d=pathlib.Path('dist'); z=list(d.glob('*.zip'))
+          assert len(z)==6, [p.name for p in z]
+          assert all(zipfile.is_zipfile(p) and zipfile.ZipFile(p).testzip() is None for p in z)
+          assert any('-chat-' in p.name for p in z)
+          assert all(any('-'+key+'-' in item.name for item in z) for key in ('project','claude-project','claude-skills','opencode','plugin'))
+          PYCODE
+      - uses: actions/upload-artifact@v4
         with:
-          name: game-graphics-creator-v${{ steps.version.outputs.version }}
-          path: dist/*.zip
+          name: game-graphics-creator-unreleased-${{ github.sha }}
+          path: |
+            dist/*.zip
+            dist/SHA256SUMS.txt
+            dist/DELIVERY-MANIFEST.json
           retention-days: 14
-
-  release-assets:
-    if: github.event_name == 'release'
-    needs: build
-    runs-on: ubuntu-latest
-    permissions:
-      actions: read
-      contents: write
-    steps:
-      - name: Download build artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: game-graphics-creator-v${{ needs.build.outputs.version }}
-          path: dist
-      - name: Attach assets to GitHub Release
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: gh release upload "${{ github.event.release.tag_name }}" dist/*.zip --clobber --repo "${{ github.repository }}"

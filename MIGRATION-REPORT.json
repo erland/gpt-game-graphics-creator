@@ -1,0 +1,1034 @@
+{
+  "migration": {
+    "source_class": "L1",
+    "target_contract_version": 1,
+    "status": "ready_with_manual_review"
+  },
+  "decisions": [
+    {
+      "area": "capabilities",
+      "action": "review_unknown",
+      "confidence": "manual_review",
+      "evidence": [
+        "critical",
+        "important"
+      ]
+    },
+    {
+      "area": "artifacts",
+      "action": "no_legacy_artifacts",
+      "confidence": "not_applicable"
+    },
+    {
+      "area": "workspace_state",
+      "action": "derive",
+      "confidence": "auto_with_warning"
+    },
+    {
+      "area": "tools",
+      "action": "inventory_scripts",
+      "confidence": "manual_review",
+      "evidence": [
+        "scripts/build_distributions.py",
+        "scripts/validate_claude_opencode_compatibility.py",
+        "scripts/validate_distributions.py",
+        "scripts/validate_gpt_builder_1_5_contract.py",
+        "scripts/validate_gpt_builder_1_5_migration.py",
+        "scripts/validate_openai_plugin_compatibility.py",
+        "scripts/validate_runtime_distribution_registry.py"
+      ]
+    }
+  ],
+  "warnings": [
+    "Unknown legacy capabilities were not migrated automatically: critical, important",
+    "Workspace/state was inferred without a structured workspace_file authority.",
+    "7 script candidate(s) were found but were not promoted to runtime tools automatically."
+  ],
+  "changes": {
+    "workspace_state": {
+      "contract_version": 1,
+      "workspace": {
+        "requirement": "optional",
+        "persistence": "preferred",
+        "portable": true,
+        "separate_from_assistant": true
+      },
+      "state": {
+        "requirement": "optional",
+        "persistence": "preferred",
+        "authority": "conversation",
+        "conversation_fallback": true
+      },
+      "runtime_preferences": {
+        "chat": "conversation_or_file",
+        "agent": "runtime_managed"
+      }
+    }
+  },
+  "opencode": {
+    "status": "reduced",
+    "reasons": [
+      "Potential runtime scripts require manual tool inventory."
+    ],
+    "can_enable_automatically": false,
+    "required_actions": [
+      "Classify required runtime scripts into an explicit tool contract."
+    ]
+  },
+  "plugin": {
+    "status": "reduced",
+    "reasons": [
+      "Potential runtime scripts require manual tool inventory."
+    ],
+    "can_enable_automatically": false,
+    "required_actions": [
+      "Classify scripts before treating them as Plugin runtime resources."
+    ]
+  },
+  "safe_copy": {
+    "source_type": "directory",
+    "source_unchanged": true,
+    "project_root": ".",
+    "destination": "/mnt/data/workgfx/upgraded"
+  },
+  "custom_gpt_retirement": {
+    "result": "changed",
+    "previously_enabled": true,
+    "legacy_configuration_preserved": true,
+    "automatic_plugin_conversion": false
+  },
+  "existing_project_assessment": {
+    "status": "review_required",
+    "project_contract_present": true,
+    "issues": [
+      "Legacy runtime.openai_plugin needs explicit mapping to runtime.plugin",
+      "No modern build_system.runtime_targets are declared",
+      "Previously enabled runtimes require independent parity review",
+      "Canonical instructions missing from expected modern source path"
+    ],
+    "dependency_inventory": {
+      "knowledge_files": [
+        "knowledge/00-KNOWLEDGE-MANIFEST.md",
+        "knowledge/01-ROLE-AND-RESPONSIBILITY.md",
+        "knowledge/02-ASSET-REQUEST-AND-DELIVERY-CONTRACT.md",
+        "knowledge/03-ART-DIRECTION-AND-STYLE-LOCK.md",
+        "knowledge/04-ASSET-MATURITY-AND-VALIDATION.md",
+        "knowledge/05-TILESETS-AND-TILEMAP-ASSETS.md",
+        "knowledge/06-SPRITES-AND-CHARACTER-SETS.md",
+        "knowledge/07-ANIMATION-SHEETS.md",
+        "knowledge/08-ISOMETRIC-ASSETS.md",
+        "knowledge/09-UI-ICONS-AND-SIGNAGE.md",
+        "knowledge/10-VFX-BACKGROUNDS-AND-PARALLAX.md",
+        "knowledge/11-PROGRAMMATIC-POST-PROCESSING.md",
+        "knowledge/12-ZIP-WORKFLOW-AND-RELEASE.md",
+        "knowledge/13-PROTOTYPE-TO-PRODUCTION-ART.md"
+      ],
+      "candidate_scripts": [
+        "scripts/build_distributions.py",
+        "scripts/validate_claude_opencode_compatibility.py",
+        "scripts/validate_distributions.py",
+        "scripts/validate_gpt_builder_1_5_contract.py",
+        "scripts/validate_gpt_builder_1_5_migration.py",
+        "scripts/validate_openai_plugin_compatibility.py",
+        "scripts/validate_runtime_distribution_registry.py"
+      ],
+      "integration_manifests": [],
+      "tools_verified": false,
+      "knowledge_completeness_verified": false,
+      "review_required": true,
+      "limitations": [
+        "Packaged files do not prove tool availability or permissions.",
+        "A distribution may omit original Knowledge and source dependencies."
+      ]
+    },
+    "ready_for_modern_distribution_build": false,
+    "release_ready": false
+  },
+  "legacy_plugin_plan": {
+    "result": "review_required",
+    "plan": "reconstructed-canonical/plugin-migration-plan.json"
+  },
+  "apply": {
+    "result": "changed"
+  },
+  "engine_migration": {
+    "engine_required": "needs_review",
+    "engine_status": "review_required",
+    "engine_candidates": [
+      "scripts/validate_claude_opencode_compatibility.py",
+      "scripts/validate_gpt_builder_1_5_contract.py",
+      "scripts/validate_gpt_builder_1_5_migration.py",
+      "scripts/validate_openai_plugin_compatibility.py",
+      "scripts/validate_runtime_distribution_registry.py"
+    ],
+    "engine_configuration_present": false,
+    "engine_selftest_verified": false,
+    "plugin_repair_status": "legacy_plugin_requires_mapping",
+    "runtime_parity_status": "unverified",
+    "automatic_plugin_repair": false,
+    "automatic_engine_activation": false,
+    "release_ready": false,
+    "required_actions": [
+      "Classify candidate Python scripts as Plugin runtime requirements, tests, or build-only tools.",
+      "If executable Plugin scripts are required, declare engine.resources and a real engine.selftest.",
+      "Rebuild Plugin using the current canonical distribution builder; inspect Skills and resources.",
+      "Validate all five distributions and test the Plugin in its actual host.",
+      "Install/verify the current canonical builder only after reviewing the copied project schema and preserving project-specific files."
+    ]
+  },
+  "canonical_build_upgrade": {
+    "status": "blocked",
+    "stage": "plugin_mapping_review",
+    "reason": "Review legacy Plugin semantics before enabling modern Plugin",
+    "release_ready": false
+  },
+  "generic_discovery": {
+    "schema_version": 1,
+    "status": "analysis_required",
+    "source_files": [
+      {
+        "path": ".github/workflows/build-distributions.yml",
+        "sha256": "a353ec626ad52211594cf75ca547f41cf94b12580b2b8c22dc2a2dd4f00cc6bf",
+        "size": 2620,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": ".gitignore",
+        "sha256": "d59333d93fdc3bdfb9ffeae793d043135f9dc13605753d90290eb2c227230423",
+        "size": 39,
+        "candidate_roles": []
+      },
+      {
+        "path": "README.md",
+        "sha256": "422045d8700d07efba8c49e5d1ad2353d165c162e107218255d94be9684750ee",
+        "size": 3580,
+        "candidate_roles": []
+      },
+      {
+        "path": "VERSION",
+        "sha256": "01c0f7d03b9babc6fef8d759c4202fdd1b0235a589c798e3b8e37accb06ad5ce",
+        "size": 10,
+        "candidate_roles": []
+      },
+      {
+        "path": "assistant/instructions.md",
+        "sha256": "f4fc0cf6f31d941a28def854c366cd0b8d3645421a2821152b4c9ddf94c13439",
+        "size": 7949,
+        "candidate_roles": [
+          "instruction_candidate"
+        ]
+      },
+      {
+        "path": "builder/BUILDER-CONFIG.yaml",
+        "sha256": "d841d9172ee80187fcfec80c3418b24e89f75a8cf809a8d316b3431b69ec4e9a",
+        "size": 463,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "builder/BUILDER-CONFIGURATION.md",
+        "sha256": "cd94bf89e6b3a9d8caf92cd9b943379c9079b1757e5ef79bd945154d69f95dab",
+        "size": 2814,
+        "candidate_roles": []
+      },
+      {
+        "path": "builder/CAPABILITIES.md",
+        "sha256": "579ed687599b27af9bfdaa789a12a126aa9a91c2579f9191cfe6f31287083730",
+        "size": 1657,
+        "candidate_roles": []
+      },
+      {
+        "path": "builder/CONVERSATION-STARTERS.md",
+        "sha256": "e3c466c510f68e203288bce3a14dfd0a87ec4b8edfbffc5bce805879aa4ed3a9",
+        "size": 900,
+        "candidate_roles": []
+      },
+      {
+        "path": "builder/DESCRIPTION.md",
+        "sha256": "101412f6aaa30e1fdfa662a13202c98793749c8ca679725ee721a4007a1ad248",
+        "size": 379,
+        "candidate_roles": []
+      },
+      {
+        "path": "builder/MAIN-INSTRUCTION.md",
+        "sha256": "f4fc0cf6f31d941a28def854c366cd0b8d3645421a2821152b4c9ddf94c13439",
+        "size": 7949,
+        "candidate_roles": []
+      },
+      {
+        "path": "builder/NAME.txt",
+        "sha256": "e61442447d8db6a8adddbe9fd56b88bb3c2c7021ac8da8da64e57e5e3e92375d",
+        "size": 22,
+        "candidate_roles": []
+      },
+      {
+        "path": "builder/UPLOAD-MANIFEST.md",
+        "sha256": "49990c5d87313f29e37c36194d8535f49e299917dd1e00e1618adce641061f70",
+        "size": 2761,
+        "candidate_roles": []
+      },
+      {
+        "path": "contract/schemas/asset-delivery-manifest.schema.yaml",
+        "sha256": "e6462dd67ee609977d32590ae2232390aa73778a14e80b24831363a43a567da7",
+        "size": 4031,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "contract/schemas/asset-request.schema.yaml",
+        "sha256": "75cae939e15450dea37c8f7d7ca40525e4455cecdb60c8a3ae6db5d7eecdfb91",
+        "size": 4796,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "contract/schemas/validation-report.schema.yaml",
+        "sha256": "853badc9f292963f87e5091388c94cba850d21485fce5e76f4a0f642b50b2813",
+        "size": 2445,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "contract/templates/asset-delivery/README.md",
+        "sha256": "71f802438dfbba947e144394548862ffd53ed3f4ec692bf32510bfdd43b2e2cd",
+        "size": 394,
+        "candidate_roles": []
+      },
+      {
+        "path": "contract/templates/asset-delivery/manifest/ASSET-MANIFEST.md",
+        "sha256": "a470182ff5d892ce13e719ab9646673c6c87f43da891c221c227baa56f83660e",
+        "size": 108,
+        "candidate_roles": []
+      },
+      {
+        "path": "contract/templates/asset-delivery/manifest/assets.yaml",
+        "sha256": "581b9a962af183480da94f983fa3e94737217228c4f04279b868ec30e2737a40",
+        "size": 779,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "contract/templates/asset-delivery/source/PROCESSING-RECORD.md",
+        "sha256": "c92625af3bdcdd13bbe4f3d5edf78fe19ad74f426701f59d2aa8bd2db11279b4",
+        "size": 717,
+        "candidate_roles": []
+      },
+      {
+        "path": "contract/templates/asset-delivery/validation/VALIDATION-REPORT.md",
+        "sha256": "a5a73706ce36dd389953fa1f56141c16ca350d98c27152e9d85222bdd8033799",
+        "size": 1219,
+        "candidate_roles": []
+      },
+      {
+        "path": "contract/templates/asset-delivery/validation/validation-report.yaml",
+        "sha256": "b13635ebc008922ea3e65aebf0b611bc482ab6ca766295a25d3388ee25a6c9ad",
+        "size": 2179,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "contract/templates/asset-request/ASSET-BRIEF.md",
+        "sha256": "8e9c91ea1d0a4ebd009c2a97ed77685a666951a72c89df27ad008d698f8a0aa3",
+        "size": 379,
+        "candidate_roles": []
+      },
+      {
+        "path": "contract/templates/asset-request/ASSET-SPEC.yaml",
+        "sha256": "6fd3f7d5cb45b2a250fc9cbd6cbe98459a789bbc8c536ad8537c537f3cf8919a",
+        "size": 705,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "contract/templates/asset-request/README.md",
+        "sha256": "0c991fab4291bb9ced470b94c734771509e6389a6afd1cc16cf3dfeb61b80614",
+        "size": 396,
+        "candidate_roles": []
+      },
+      {
+        "path": "contract/templates/asset-request/STYLE-GUIDE.md",
+        "sha256": "b5ec6867b29debe8132b6e87e4f3a06ecc8dbc85f59f23c211e9a4c7eb9af948",
+        "size": 1074,
+        "candidate_roles": []
+      },
+      {
+        "path": "contract/templates/asset-request/VALIDATION-CRITERIA.md",
+        "sha256": "ca158c4fbcc5c1d1b9697fba616901977e1002eabca5f075d757b6beb50d5a69",
+        "size": 353,
+        "candidate_roles": []
+      },
+      {
+        "path": "docs/CHANGELOG.md",
+        "sha256": "e3fc11c2c7034649688244522e321b2c0ccf6d020c29725d2fee731fea2ec294",
+        "size": 5130,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "docs/FILE-OWNERSHIP-AND-ANTI-OVERLAP.md",
+        "sha256": "85c59bed9e8e0b5b36ca2ab84976e2b100725a62aea9e14d9d572741638e4e15",
+        "size": 4078,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "docs/RELEASE-CHECKLIST.md",
+        "sha256": "a10645ccab8dd4260b99721356ef14ea338e3757706aa51421377e690627ac83",
+        "size": 2182,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "docs/RELEASE-NOTES.md",
+        "sha256": "d468bbba00e144383371855657c47c40afed5aebb3e846ac451934112523ff20",
+        "size": 1049,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "docs/claude-opencode-compatibility.md",
+        "sha256": "59828171bb060275ae56ff8e2747ee835a981880824cfe632e6e0ae74f97cc9a",
+        "size": 2820,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "docs/gpt-builder-1.5-runtime-migration.md",
+        "sha256": "ef4a0403d25573cd2bf03a6afe98e6d2d16dcf80e17328decefcceff66be12a6",
+        "size": 3186,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "docs/openai-plugin-compatibility.md",
+        "sha256": "ea88619e1dc4604ff996cb29597b14de59783369c01d3ca67e53a75f0554ec55",
+        "size": 2989,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "fixtures/01-isometric-ground-tile/asset-delivery/README.md",
+        "sha256": "b440ef2b5b51fed6f56104fac45cedcbbf52c3e01572b9c095b9cd628425e142",
+        "size": 86,
+        "candidate_roles": []
+      },
+      {
+        "path": "fixtures/01-isometric-ground-tile/asset-delivery/manifest/ASSET-MANIFEST.md",
+        "sha256": "9aa1032038bbaf260679e570927243c02a58ff64feb6b0a6e3fe70480a53e779",
+        "size": 37,
+        "candidate_roles": []
+      },
+      {
+        "path": "fixtures/01-isometric-ground-tile/asset-delivery/manifest/assets.yaml",
+        "sha256": "56c8fbd1ba2707df98ee9ab6c22c04b4c359933744773da370aa99381ca19a99",
+        "size": 807,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "fixtures/01-isometric-ground-tile/asset-delivery/source/PROCESSING-RECORD.md",
+        "sha256": "89f7365cc917769f801411baa6f5fe5052a11b565a8fef2cddf8f0bf727b857e",
+        "size": 94,
+        "candidate_roles": []
+      },
+      {
+        "path": "fixtures/01-isometric-ground-tile/asset-delivery/validation/VALIDATION-REPORT.md",
+        "sha256": "ee0522c15183f738fa8454cedab3fd3cbf397f1216b0304ca980dfb8130b60bd",
+        "size": 100,
+        "candidate_roles": []
+      },
+      {
+        "path": "fixtures/01-isometric-ground-tile/asset-delivery/validation/validation-report.yaml",
+        "sha256": "37742c494a2fbb2232d895d9cd8abfeeef348f8e253de05705bb9c4603b1943b",
+        "size": 933,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "fixtures/01-isometric-ground-tile/asset-request/ASSET-BRIEF.md",
+        "sha256": "7dd80724a509fd1064b33287a0bdec136a46d513d47e4e45468061c6c9dc3862",
+        "size": 71,
+        "candidate_roles": []
+      },
+      {
+        "path": "fixtures/01-isometric-ground-tile/asset-request/ASSET-SPEC.yaml",
+        "sha256": "47f93bf1868edbc1606c5b2ae425657850a80e0770f54676908711110602a921",
+        "size": 874,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "fixtures/01-isometric-ground-tile/asset-request/README.md",
+        "sha256": "2f574ac3c4cd1c1c2f51128bb87210b04ae08488013ab24932cac628658956dd",
+        "size": 69,
+        "candidate_roles": []
+      },
+      {
+        "path": "fixtures/01-isometric-ground-tile/asset-request/STYLE-GUIDE.md",
+        "sha256": "aae78a5e9fe60b3d27c1f0de153dda3e8e2ced93d3968b78c450315eba3bd7b6",
+        "size": 90,
+        "candidate_roles": []
+      },
+      {
+        "path": "fixtures/01-isometric-ground-tile/asset-request/VALIDATION-CRITERIA.md",
+        "sha256": "741f11a90244b2479e3e38bd3d30705d7a32260fe97587799379f04b97c919bc",
+        "size": 124,
+        "candidate_roles": []
+      },
+      {
+        "path": "fixtures/02-isometric-prop/asset-request/ASSET-BRIEF.md",
+        "sha256": "767246bd7d57df6d5a2121d0801ef13b820485c3b5f2ab3ed436f2a5a81f9fde",
+        "size": 71,
+        "candidate_roles": []
+      },
+      {
+        "path": "fixtures/02-isometric-prop/asset-request/ASSET-SPEC.yaml",
+        "sha256": "6a21b9a7c778c1dd49541a92ddeec72b9ef024cdc0459961420c72640e1c4ec3",
+        "size": 783,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "fixtures/02-isometric-prop/asset-request/README.md",
+        "sha256": "f54eb059a74ea907f9f35c0e1963e928d0df78e1738f90da1101f65ccd3d1b7a",
+        "size": 62,
+        "candidate_roles": []
+      },
+      {
+        "path": "fixtures/02-isometric-prop/asset-request/STYLE-GUIDE.md",
+        "sha256": "aae78a5e9fe60b3d27c1f0de153dda3e8e2ced93d3968b78c450315eba3bd7b6",
+        "size": 90,
+        "candidate_roles": []
+      },
+      {
+        "path": "fixtures/02-isometric-prop/asset-request/VALIDATION-CRITERIA.md",
+        "sha256": "741f11a90244b2479e3e38bd3d30705d7a32260fe97587799379f04b97c919bc",
+        "size": 124,
+        "candidate_roles": []
+      },
+      {
+        "path": "fixtures/03-character-animation/asset-request/ASSET-BRIEF.md",
+        "sha256": "369f1fdabd86e5051e2f601979d158898a20451bf7c54fa39b695deb25830172",
+        "size": 69,
+        "candidate_roles": []
+      },
+      {
+        "path": "fixtures/03-character-animation/asset-request/ASSET-SPEC.yaml",
+        "sha256": "5e62bb50c901e40c8a1219433c9bca46fbebe4b44034182510ac2e5a98f1ffed",
+        "size": 903,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "fixtures/03-character-animation/asset-request/README.md",
+        "sha256": "f58e631dd7b7825eec64df10e93bf8858c7dd5caabe4bd8c82d35af5e1c86424",
+        "size": 67,
+        "candidate_roles": []
+      },
+      {
+        "path": "fixtures/03-character-animation/asset-request/STYLE-GUIDE.md",
+        "sha256": "aae78a5e9fe60b3d27c1f0de153dda3e8e2ced93d3968b78c450315eba3bd7b6",
+        "size": 90,
+        "candidate_roles": []
+      },
+      {
+        "path": "fixtures/03-character-animation/asset-request/VALIDATION-CRITERIA.md",
+        "sha256": "741f11a90244b2479e3e38bd3d30705d7a32260fe97587799379f04b97c919bc",
+        "size": 124,
+        "candidate_roles": []
+      },
+      {
+        "path": "fixtures/99-invalid-presentation-sheet/FAILURES.yaml",
+        "sha256": "b32be37492c0441dced7fd71286445a221f7354b19c6d78abc43f016b661900e",
+        "size": 202,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "fixtures/99-invalid-presentation-sheet/README.md",
+        "sha256": "5147ca02622e81e05116dee4b2b750832a3c63f556261b5056f97d9238b0eea8",
+        "size": 259,
+        "candidate_roles": []
+      },
+      {
+        "path": "gpt-builder-1.5-contract.yaml",
+        "sha256": "4dc42c430e34e5e1ccb4d761c0861fc71ab6ba652440d63d4b6d27f471a67b1c",
+        "size": 4091,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "gpt-project.yaml",
+        "sha256": "3770e0c237030eaed0122924cabb6f832efbd178289849443b6ca700d0eb5e96",
+        "size": 2351,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "knowledge/00-KNOWLEDGE-MANIFEST.md",
+        "sha256": "0c3f823781101a686510ff357bafe8b0e40e63ee9ab8a7ea476646b93ae8f08a",
+        "size": 2251,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "knowledge/01-ROLE-AND-RESPONSIBILITY.md",
+        "sha256": "20bb441cb901ab7a50aba88ae1fbbd2a479ce3b4480f2e63aacee754ee6b6a6b",
+        "size": 2038,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "knowledge/02-ASSET-REQUEST-AND-DELIVERY-CONTRACT.md",
+        "sha256": "cab66b2d5d3a09a261e1daeee1df938b6dddd636103c11a21a1271e6bce67078",
+        "size": 10675,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "knowledge/03-ART-DIRECTION-AND-STYLE-LOCK.md",
+        "sha256": "03d3bd888cc4160cc770c6db3f6aa2fb0d0616ccc26ebacb5f1112416fb3f5d7",
+        "size": 4369,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "knowledge/04-ASSET-MATURITY-AND-VALIDATION.md",
+        "sha256": "4a4d57b872b6f7d0bf97ac6905bc1772cc9511b613bb2516be6a27fc4bfa07d9",
+        "size": 9983,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "knowledge/05-TILESETS-AND-TILEMAP-ASSETS.md",
+        "sha256": "3a98b794b2c3aa3ca593ddd9243b7340423cf62ec83f9c4bcf8f9ad76c21f088",
+        "size": 3548,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "knowledge/06-SPRITES-AND-CHARACTER-SETS.md",
+        "sha256": "aae7722bd7b5131e56b86bdb255bc06b2777680613b788fb0eb69b34b1a2fe36",
+        "size": 3076,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "knowledge/07-ANIMATION-SHEETS.md",
+        "sha256": "f2b0214f0d76d462c8454e854d7872e4fafe1c34a3e589a8c356888bbcf1970d",
+        "size": 2625,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "knowledge/08-ISOMETRIC-ASSETS.md",
+        "sha256": "1d143cc2deddfc520f973af87c135f67b033c5bf04d025652ff9161976b89195",
+        "size": 2918,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "knowledge/09-UI-ICONS-AND-SIGNAGE.md",
+        "sha256": "d768ed7404247270a2bbc8c4c17b5cb564222f28f21752c3479dcf38bf6a307a",
+        "size": 2584,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "knowledge/10-VFX-BACKGROUNDS-AND-PARALLAX.md",
+        "sha256": "1ada492bdabcc10f3d16fd06dfa1120673575bea2c7a817cc709d72e9f5fb59d",
+        "size": 3022,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "knowledge/11-PROGRAMMATIC-POST-PROCESSING.md",
+        "sha256": "015aefee7c2cbfd3f2a8dc5b05ae9224e0bf596abde6dd98e07ff0aa8fc55d50",
+        "size": 9906,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "knowledge/12-ZIP-WORKFLOW-AND-RELEASE.md",
+        "sha256": "d5ac588ab52d237c276289b007a3d8a8f4aa52a4eb77d9d33de75bcea6379b87",
+        "size": 9755,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "knowledge/13-PROTOTYPE-TO-PRODUCTION-ART.md",
+        "sha256": "ca06d00a426cd4ffb0cd15e762162106ab9ff3d1e736bf73d9f363b9b9f5f751",
+        "size": 4627,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "migration-status-1.5.yaml",
+        "sha256": "c32957dd8d717d2a75ccbb1dc45fc876b238e5a4124ce154ad26d16ecb26ae50",
+        "size": 5304,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "portable/START-HERE.md",
+        "sha256": "8e4a56ef585f2d72ebc6c739dc8f36483ca1d7d8979ef1476c7a8817c1785582",
+        "size": 1231,
+        "candidate_roles": []
+      },
+      {
+        "path": "reconstructed-canonical/plugin-migration-plan.json",
+        "sha256": "f9bdf94dd9d4801d5bd7e0dfcfcd6fcfc7138c39ca32403af372bc826e7f60ed",
+        "size": 1162,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "runtime-distribution-registry.yaml",
+        "sha256": "f12e3c324dd8bbae8811a583b8237822f0f7a307bcb3d4233892d137b41d5bb8",
+        "size": 1641,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "scripts/build_distributions.py",
+        "sha256": "2da84e43dfa75bf7b1c825c48c76f2f68734980bebf70bce8f0313eb18f30d36",
+        "size": 4380,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "scripts/validate_claude_opencode_compatibility.py",
+        "sha256": "9530508e6f2c710d3250e8463222d1969ec077163d5876a5a139398bd0a06742",
+        "size": 1915,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "scripts/validate_distributions.py",
+        "sha256": "5dfab466802faec5af80db9eb415117c43e2460096e4a227c1ad688f06df09ce",
+        "size": 4168,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "scripts/validate_gpt_builder_1_5_contract.py",
+        "sha256": "3cc7b79acc3abb75d630be5f0a08dc42b0e42ae3c112785cb29caaba5c0be547",
+        "size": 4139,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "scripts/validate_gpt_builder_1_5_migration.py",
+        "sha256": "5cf0ac810ece25d277a250ef580add4e32bfbcee8d5191ef8b093ac64ce24af8",
+        "size": 3612,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "scripts/validate_openai_plugin_compatibility.py",
+        "sha256": "2cd11f41617b17f4fd8e82d27fea466c6e08782d02922d98696c3705cba68cbf",
+        "size": 2184,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "scripts/validate_runtime_distribution_registry.py",
+        "sha256": "edf3be012a3cfd0e5083f2c4398b5b0106a46c8f8969e3215abbe69fdc32f6ec",
+        "size": 1392,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "tests/G01.md",
+        "sha256": "707b56c98e03b9f04a5a00ce02c973b3af5a9542a6dc8944efe06e3723690030",
+        "size": 545,
+        "candidate_roles": []
+      },
+      {
+        "path": "tests/G02.md",
+        "sha256": "634acf43ac050e0b14e03c34fb400331ee4e2ab3669df3b8d669b7a92f49ebd8",
+        "size": 548,
+        "candidate_roles": []
+      },
+      {
+        "path": "tests/G03.md",
+        "sha256": "20452c917f87aaec52c6adbd3a95a2ffae8a3d00cb73afb0acfc7eb584223f7a",
+        "size": 577,
+        "candidate_roles": []
+      },
+      {
+        "path": "tests/G04.md",
+        "sha256": "589bc2a4c7c154f58facf310c4b6eaf3ae89e73b7a6f59eff6b2b50077817600",
+        "size": 537,
+        "candidate_roles": []
+      },
+      {
+        "path": "tests/G05.md",
+        "sha256": "13a2e283b303c395fcd8e38cc289299d980c0178af5f477f6b545af9ddbea5c8",
+        "size": 545,
+        "candidate_roles": []
+      },
+      {
+        "path": "tests/G06.md",
+        "sha256": "31be798fcf5d640cc881de82e257035bdb228c53bb64e620dd45761aa62cc0dd",
+        "size": 558,
+        "candidate_roles": []
+      },
+      {
+        "path": "tests/G07.md",
+        "sha256": "350b5e26957d2cb2ada310e6028dba64a89540ceda955bd85ef2047df168c054",
+        "size": 534,
+        "candidate_roles": []
+      },
+      {
+        "path": "tests/G08.md",
+        "sha256": "9aaa837fb2f922befb04b829bd49d14f24b44bfb3483c3c811f6b1bb38cb2a11",
+        "size": 549,
+        "candidate_roles": []
+      },
+      {
+        "path": "tests/G09.md",
+        "sha256": "d3ebe34594ec0de778beb9c5f5a18818b9640e5e22f9ade95b4dc2475a7a7682",
+        "size": 557,
+        "candidate_roles": []
+      },
+      {
+        "path": "tests/G10.md",
+        "sha256": "b258ce73b8d27aca6c9078c9f2230863b3af32adcd91ed76c7c1d8618f911f5f",
+        "size": 572,
+        "candidate_roles": []
+      },
+      {
+        "path": "tests/G11.md",
+        "sha256": "9e1b87b62fcff12139fa15da2aaee6f3f81427d516e3ca704fcabae6fce2fd8d",
+        "size": 556,
+        "candidate_roles": []
+      },
+      {
+        "path": "tests/G12.md",
+        "sha256": "6245dce5e4576950e991e34501663b9ed104de38d849a539ea50495f81c989f6",
+        "size": 567,
+        "candidate_roles": []
+      },
+      {
+        "path": "tests/G13.md",
+        "sha256": "deae05308ee6b4922c578575db051e593add9a0632ac2b3e8a19abb97e8a6e6c",
+        "size": 565,
+        "candidate_roles": []
+      },
+      {
+        "path": "tests/G14.md",
+        "sha256": "b99794a65e150cd52c698743bcdcabc2fd06f813aa6be3034af31d19a96f917a",
+        "size": 557,
+        "candidate_roles": []
+      },
+      {
+        "path": "tests/G15.md",
+        "sha256": "a5ec1e2a6d149d4838a91358c432903146a75ac45a5d4f5420c3babb6032d187",
+        "size": 584,
+        "candidate_roles": []
+      },
+      {
+        "path": "tests/G16.md",
+        "sha256": "8080573d33767bd1aff2033ff617e50632ccc9b7025a328d8ec671bdc84271a6",
+        "size": 1243,
+        "candidate_roles": []
+      },
+      {
+        "path": "tests/README.md",
+        "sha256": "da20463e57d03c2666aa198986b026379ed3dbadf69323d9e0e929b168fd1710",
+        "size": 484,
+        "candidate_roles": []
+      },
+      {
+        "path": "tests/TEST-MANIFEST.yaml",
+        "sha256": "ae56756fa458c120ff7a41485beace5f3b21f433ebad9c6ec61777b8668d80e8",
+        "size": 698,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      }
+    ],
+    "candidates": {
+      "instruction_candidate": [
+        "assistant/instructions.md"
+      ],
+      "knowledge_candidate": [
+        "docs/CHANGELOG.md",
+        "docs/FILE-OWNERSHIP-AND-ANTI-OVERLAP.md",
+        "docs/RELEASE-CHECKLIST.md",
+        "docs/RELEASE-NOTES.md",
+        "docs/claude-opencode-compatibility.md",
+        "docs/gpt-builder-1.5-runtime-migration.md",
+        "docs/openai-plugin-compatibility.md",
+        "knowledge/00-KNOWLEDGE-MANIFEST.md",
+        "knowledge/01-ROLE-AND-RESPONSIBILITY.md",
+        "knowledge/02-ASSET-REQUEST-AND-DELIVERY-CONTRACT.md",
+        "knowledge/03-ART-DIRECTION-AND-STYLE-LOCK.md",
+        "knowledge/04-ASSET-MATURITY-AND-VALIDATION.md",
+        "knowledge/05-TILESETS-AND-TILEMAP-ASSETS.md",
+        "knowledge/06-SPRITES-AND-CHARACTER-SETS.md",
+        "knowledge/07-ANIMATION-SHEETS.md",
+        "knowledge/08-ISOMETRIC-ASSETS.md",
+        "knowledge/09-UI-ICONS-AND-SIGNAGE.md",
+        "knowledge/10-VFX-BACKGROUNDS-AND-PARALLAX.md",
+        "knowledge/11-PROGRAMMATIC-POST-PROCESSING.md",
+        "knowledge/12-ZIP-WORKFLOW-AND-RELEASE.md",
+        "knowledge/13-PROTOTYPE-TO-PRODUCTION-ART.md"
+      ],
+      "script_candidate": [
+        "scripts/build_distributions.py",
+        "scripts/validate_claude_opencode_compatibility.py",
+        "scripts/validate_distributions.py",
+        "scripts/validate_gpt_builder_1_5_contract.py",
+        "scripts/validate_gpt_builder_1_5_migration.py",
+        "scripts/validate_openai_plugin_compatibility.py",
+        "scripts/validate_runtime_distribution_registry.py"
+      ],
+      "configuration_candidate": [
+        ".github/workflows/build-distributions.yml",
+        "builder/BUILDER-CONFIG.yaml",
+        "contract/schemas/asset-delivery-manifest.schema.yaml",
+        "contract/schemas/asset-request.schema.yaml",
+        "contract/schemas/validation-report.schema.yaml",
+        "contract/templates/asset-delivery/manifest/assets.yaml",
+        "contract/templates/asset-delivery/validation/validation-report.yaml",
+        "contract/templates/asset-request/ASSET-SPEC.yaml",
+        "fixtures/01-isometric-ground-tile/asset-delivery/manifest/assets.yaml",
+        "fixtures/01-isometric-ground-tile/asset-delivery/validation/validation-report.yaml",
+        "fixtures/01-isometric-ground-tile/asset-request/ASSET-SPEC.yaml",
+        "fixtures/02-isometric-prop/asset-request/ASSET-SPEC.yaml",
+        "fixtures/03-character-animation/asset-request/ASSET-SPEC.yaml",
+        "fixtures/99-invalid-presentation-sheet/FAILURES.yaml",
+        "gpt-builder-1.5-contract.yaml",
+        "gpt-project.yaml",
+        "migration-status-1.5.yaml",
+        "reconstructed-canonical/plugin-migration-plan.json",
+        "runtime-distribution-registry.yaml",
+        "tests/TEST-MANIFEST.yaml"
+      ]
+    },
+    "analysis_contract": {
+      "purpose": "Classify project behavior, knowledge, dependencies and workflows based on evidence",
+      "evidence_rule": "Every proposed fact must cite a source_files.path and SHA-256",
+      "uncertainty_rule": "Mark unresolved source ambiguity for review; do not invent behavior",
+      "output": "platform-neutral reviewed project model before runtime configuration"
+    },
+    "release_ready": false,
+    "runtime_activated": false
+  },
+  "project_hygiene": {
+    "status": "review_required",
+    "missing_documents": [
+      "PROJECT.md",
+      "STATUS.md",
+      "docs/development-plan.md"
+    ],
+    "possible_stale_versions": [
+      {
+        "file": "README.md",
+        "mentioned_versions": [
+          "1.5.0"
+        ]
+      }
+    ],
+    "ci_references_to_reconcile": [],
+    "legacy_validator_candidates": [],
+    "broken_document_links": [],
+    "open_development_checklist_items": [],
+    "open_migration_checklists": [],
+    "unresolved_status_claims": [],
+    "files_deleted": [],
+    "documentation_modified": false,
+    "required_actions": [
+      "Update README, PROJECT, STATUS, development plan and migration checklist together.",
+      "Compare legacy validator behavior with canonical checks before deleting any file.",
+      "Reconcile CI identifiers and actual validation evidence; do not claim host parity from ZIP builds.",
+      "Verify no documentation points at removed paths before release."
+    ]
+  },
+  "migration_steps": [
+    {
+      "id": "inventory",
+      "title": "Inventera källprojekt",
+      "status": "completed"
+    },
+    {
+      "id": "model",
+      "title": "Granska projektmodell och runtime-mappning",
+      "status": "completed"
+    },
+    {
+      "id": "engine",
+      "title": "Bedöm och installera kanonisk byggmotor",
+      "status": "pending_or_blocked"
+    },
+    {
+      "id": "distributions",
+      "title": "Bygg och kontrollera fem distributioner",
+      "status": "pending_or_blocked"
+    },
+    {
+      "id": "hygiene",
+      "title": "Uppdatera dokumentation och granska äldre filer",
+      "status": "review_required"
+    },
+    {
+      "id": "release",
+      "title": "Slutverifiera runtime och release",
+      "status": "pending"
+    }
+  ],
+  "next_step": {
+    "id": "engine",
+    "title": "Bedöm och installera kanonisk byggmotor"
+  }
+}

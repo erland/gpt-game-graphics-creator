@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "project": "gge-e2e-fixture",
+  "version": "0.2.0",
+  "maturity": "productionCandidate",
+  "visual_approval": "not_verified",
+  "developer_integration": "not_verified",
+  "assets": [
+    {
+      "id": "ground-01",
+      "file": "tile-upgrade.png",
+      "footprint": [
+        1,
+        1
+      ],
+      "projection": "isometric_2_1",
+      "anchor": [
+        64,
+        32
+      ],
+      "scale": 1,
+      "atlas_slot": 0,
+      "maturity": "productionCandidate",
+      "sha256": "112eed6e6fd3f5ddffa49ec3a5b5bb73ad5f22c3af0a85cceaf1ea353b7ed370"
+    },
+    {
+      "id": "prop-01",
+      "file": "prop-upgrade.png",
+      "footprint": [
+        1,
+        1
+      ],
+      "projection": "isometric_2_1",
+      "anchor": [
+        32,
+        88
+      ],
+      "scale": 1,
+      "atlas_slot": 1,
+      "maturity": "productionCandidate",
+      "sha256": "2e57d1eaae2599c0a2740e6f12f3af10bd06e1feb717269b7caa24e838fadefa"
+    }
+  ]
+}

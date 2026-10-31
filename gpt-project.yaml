@@ -3,22 +3,26 @@ project:
   id: game-graphics-creator
   name: Game Graphics Creator
   profile: asset_pipeline_advanced
-
+  language: en
+  description: Game graphics production assistant for 2D and isometric games with
+    asset specifications and honest validation.
 instructions:
-  canonical: assistant/instructions.md
+  canonical: canonical/core.md
   legacy_source: builder/MAIN-INSTRUCTION.md
   preserve_legacy_source_byte_identical: true
-
+  mode: modular_skills
+  core: canonical/core.md
+  assembly: canonical/assembly.json
 knowledge_architecture:
   canonical_root: knowledge
   upload_manifest: builder/UPLOAD-MANIFEST.md
   expected_files: 13
-
 runtime:
   chat_zip:
     enabled: true
+    start_here_template: templates/START-HERE.chat.md.tpl
   custom_gpt:
-    enabled: true
+    enabled: false
     instruction:
       source: assistant/instructions.md
       packaging_path: builder/MAIN-INSTRUCTION.md
@@ -28,39 +32,82 @@ runtime:
       strategy: upload_manifest
       expected_files: 13
   claude:
-    enabled: false
+    enabled: true
     compatibility: reduced
-    activation: not_active
+    activation: package_build_only_host_unverified
     blocker: critical_visual_and_file_pipeline_not_guaranteed
     assessment: docs/claude-opencode-compatibility.md
+    project:
+      instructions: project/instructions.md
+      knowledge: project/knowledge
+      runtime_contract: project/runtime-contract.json
+    templates:
+      readme: templates/README.claude.md.tpl
+    validation:
+      require_instructions: true
+      require_runtime_contract: true
   opencode:
-    enabled: false
+    enabled: true
     compatibility: reduced
-    activation: not_active
+    activation: package_build_only_host_unverified
     blocker: critical_image_generation_not_guaranteed
     assessment: docs/claude-opencode-compatibility.md
-  openai_plugin:
-    enabled: false
+    layout:
+      instructions: AGENTS.md
+      config: opencode.json
+      tools: .opencode/tools
+      runtime_scripts: scripts
+      runtime_contract: .opencode/runtime-contract.json
+      knowledge: knowledge
+    templates:
+      readme: templates/README.opencode.md.tpl
+    validation:
+      require_agents_md: true
+      require_runtime_contract: true
+    skills:
+      enabled: true
+      directory: .opencode/skills
+      definitions:
+      - id: gpt-project-workflow
+        name: gpt-project-workflow
+        description: Planera, återuppta och fortsätt ett GPT Byggaren-projekt utifrån
+          faktisk projektstatus.
+        references:
+        - docs/dynamic-planning.md
+        - docs/resume-flow.md
+        - docs/next-step-recommendation.md
+  plugin:
+    enabled: true
     compatibility: reduced
-    status: assessed_not_active
+    status: package_build_only_host_unverified
     advisory_only: true
     blockers:
-      - critical_image_generation_not_guaranteed
-      - deterministic_file_pipeline_not_guaranteed
-      - persistent_delivery_state_not_guaranteed
+    - critical_image_generation_not_guaranteed
+    - deterministic_file_pipeline_not_guaranteed
+    - persistent_delivery_state_not_guaranteed
     assessment: docs/openai-plugin-compatibility.md
-
+    layout:
+      manifest_file: plugin.json
+      skills: skills
+      references: references
+      assets: assets
+      scripts: scripts
+    templates:
+      readme: templates/README.plugin.md.tpl
+    validation:
+      require_manifest: true
+      require_skill: true
+      require_skill_frontmatter: true
 capabilities:
   critical:
-    - image_generation
-    - code_interpreter_and_data_analysis
+  - image_generation
+  - code_interpreter_and_data_analysis
   important:
-    - image_upload_and_analysis
-    - structured_asset_contracts
-    - deterministic_file_validation
-    - cumulative_zip_delivery
-    - web_research_optional
-
+  - image_upload_and_analysis
+  - structured_asset_contracts
+  - deterministic_file_validation
+  - cumulative_zip_delivery
+  - web_research_optional
 release:
   version_file: VERSION
   preserve_current_version: true
@@ -70,3 +117,127 @@ release:
     manifest: tests/TEST-MANIFEST.yaml
     expected_status: notRun
     migration_may_mark_pass: false
+workspace_state:
+  contract_version: 1
+  workspace:
+    requirement: optional
+    persistence: preferred
+    portable: true
+    separate_from_assistant: true
+  state:
+    requirement: optional
+    persistence: preferred
+    authority: conversation
+    conversation_fallback: true
+  runtime_preferences:
+    chat: conversation_or_file
+    agent: runtime_managed
+  schema: schemas/workspace-state-contract.schema.json
+build_system:
+  model: docs/build-system-1.6.33.md
+  build_script: scripts/build_distributions.py
+  validation_script: scripts/validate_distributions.py
+  targets:
+  - project
+  - chat
+  - claude_project
+  - claude_skills
+  - opencode
+  - plugin
+  runtime_targets:
+    chat:
+      runtime_id: chatgpt_chat
+      runtime_key: chat_zip
+      builder: chat
+      artifact_type: chat_zip
+      filename_pattern: <project-id>-chat-<version>.zip
+    claude_project:
+      runtime_id: claude_project
+      runtime_key: claude
+      builder: claude
+      artifact_type: claude_project_zip
+      filename_pattern: <project-id>-claude-project-<version>.zip
+    claude_skills:
+      runtime_id: claude_skills
+      runtime_key: claude
+      builder: claude_skills
+      artifact_type: claude_skills_zip
+      filename_pattern: <project-id>-claude-skills-<version>.zip
+    opencode:
+      runtime_id: opencode
+      runtime_key: opencode
+      builder: opencode
+      artifact_type: opencode_zip
+      filename_pattern: <project-id>-opencode-<version>.zip
+    plugin:
+      runtime_id: openai_plugin
+      runtime_key: plugin
+      builder: plugin
+      artifact_type: plugin_zip
+      filename_pattern: <project-id>-plugin-<version>.zip
+  output_root: dist
+  working_root: build
+  deterministic_zip: true
+  manifest: true
+  checksums: sha256
+  project_zip_excludes:
+  - build/**
+  - dist/**
+  - .git/**
+  - '**/__pycache__/**'
+  - '**/.pytest_cache/**'
+structure:
+  conversation_starters:
+    path: builder
+    required: false
+  runtime_policy:
+    path: src/runtime-policy
+    required: false
+  schemas:
+    path: contract/schemas
+    required: false
+  templates:
+    path: contract/templates
+    required: false
+  scripts:
+    path: scripts
+    required: false
+  tests:
+    path: tests
+    required: false
+  knowledge:
+    path: knowledge
+    required: false
+skills:
+  enabled: true
+  resource_policy: explicit
+  definitions:
+  - id: graphics-creation
+    name: Graphics Creation
+    description: Create and refine game graphics, style lock, sprites and visual assets.
+    source: canonical/skills/graphics-creation/behavior.md
+    references:
+    - knowledge/03-ART-DIRECTION-AND-STYLE-LOCK.md
+    - knowledge/05-TILESETS-AND-TILEMAP-ASSETS.md
+    - knowledge/06-SPRITES-AND-CHARACTER-SETS.md
+    - knowledge/07-ANIMATION-SHEETS.md
+    - knowledge/08-ISOMETRIC-ASSETS.md
+    - knowledge/09-UI-ICONS-AND-SIGNAGE.md
+    - knowledge/10-VFX-BACKGROUNDS-AND-PARALLAX.md
+    - knowledge/13-PROTOTYPE-TO-PRODUCTION-ART.md
+    assets: []
+    scripts: []
+  - id: asset-production
+    name: Asset Production
+    description: Validate, normalize, package, and deliver structured graphics assets.
+    source: canonical/skills/asset-production/behavior.md
+    references:
+    - knowledge/00-KNOWLEDGE-MANIFEST.md
+    - knowledge/01-ROLE-AND-RESPONSIBILITY.md
+    - knowledge/02-ASSET-REQUEST-AND-DELIVERY-CONTRACT.md
+    - knowledge/04-ASSET-MATURITY-AND-VALIDATION.md
+    - knowledge/11-PROGRAMMATIC-POST-PROCESSING.md
+    - knowledge/12-ZIP-WORKFLOW-AND-RELEASE.md
+    assets: []
+    scripts: []
+  schema: schemas/game-graphics-modular-skills.schema.json
