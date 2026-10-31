@@ -1,0 +1,25 @@
+{
+  "status": "PASS",
+  "errors": [],
+  "assets_checked": [
+    {
+      "id": "ground-01",
+      "file": "/mnt/data/gge_work/game-graphics-creator/tests/e2e/fixtures/tile-upgrade.png",
+      "size": [
+        128,
+        64
+      ],
+      "sha256": "112eed6e6fd3f5ddffa49ec3a5b5bb73ad5f22c3af0a85cceaf1ea353b7ed370"
+    },
+    {
+      "id": "prop-01",
+      "file": "/mnt/data/gge_work/game-graphics-creator/tests/e2e/fixtures/prop-upgrade.png",
+      "size": [
+        64,
+        96
+      ],
+      "sha256": "2e57d1eaae2599c0a2740e6f12f3af10bd06e1feb717269b7caa24e838fadefa"
+    }
+  ],
+  "scope": "ACTUAL_FILE_BYTES_ONLY_NOT_HOST_TEST"
+}
