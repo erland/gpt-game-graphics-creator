@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "project": "gge-e2e-fixture",
-  "version": "0.2.1",
-  "maturity": "productionCandidate",
+  "version": "0.1.1",
+  "maturity": "technicalPrototype",
   "visual_approval": "not_verified",
   "developer_integration": "not_verified",
   "assets": [
@@ -20,12 +20,12 @@
       ],
       "scale": 1,
       "atlas_slot": 0,
-      "maturity": "productionCandidate",
+      "maturity": "technicalPrototype",
       "sha256": "81821f2d7af88fa99feb549e945510d8fcf94aaaf1609505d961e009c2654f87"
     },
     {
       "id": "prop-01",
-      "file": "prop-upgrade.png",
+      "file": "prop-prototype.png",
       "footprint": [
         1,
         1
@@ -37,8 +37,18 @@
       ],
       "scale": 1,
       "atlas_slot": 1,
-      "maturity": "productionCandidate",
-      "sha256": "2e57d1eaae2599c0a2740e6f12f3af10bd06e1feb717269b7caa24e838fadefa"
+      "maturity": "technicalPrototype",
+      "sha256": "2e292d077ac265468dd0618535adf19cacfd1905ba608e573656dc4a24ea91ee"
     }
-  ]
+  ],
+  "revision": {
+    "type": "selective",
+    "source_version": "0.1.0",
+    "changed_asset_ids": [
+      "ground-01"
+    ],
+    "unchanged_asset_ids": [
+      "prop-01"
+    ]
+  }
 }
