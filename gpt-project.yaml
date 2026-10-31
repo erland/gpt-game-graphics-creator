@@ -68,14 +68,28 @@ runtime:
       enabled: true
       directory: .opencode/skills
       definitions:
-      - id: gpt-project-workflow
-        name: gpt-project-workflow
-        description: Planera, återuppta och fortsätt ett GPT Byggaren-projekt utifrån
-          faktisk projektstatus.
+      - id: graphics-creation
+        name: Graphics Creation
+        description: Create and refine game graphics, style lock, sprites and visual assets.
         references:
-        - docs/dynamic-planning.md
-        - docs/resume-flow.md
-        - docs/next-step-recommendation.md
+        - knowledge/03-ART-DIRECTION-AND-STYLE-LOCK.md
+        - knowledge/05-TILESETS-AND-TILEMAP-ASSETS.md
+        - knowledge/06-SPRITES-AND-CHARACTER-SETS.md
+        - knowledge/07-ANIMATION-SHEETS.md
+        - knowledge/08-ISOMETRIC-ASSETS.md
+        - knowledge/09-UI-ICONS-AND-SIGNAGE.md
+        - knowledge/10-VFX-BACKGROUNDS-AND-PARALLAX.md
+        - knowledge/13-PROTOTYPE-TO-PRODUCTION-ART.md
+      - id: asset-production
+        name: Asset Production
+        description: Validate, normalize, package, and deliver structured graphics assets.
+        references:
+        - knowledge/00-KNOWLEDGE-MANIFEST.md
+        - knowledge/01-ROLE-AND-RESPONSIBILITY.md
+        - knowledge/02-ASSET-REQUEST-AND-DELIVERY-CONTRACT.md
+        - knowledge/04-ASSET-MATURITY-AND-VALIDATION.md
+        - knowledge/11-PROGRAMMATIC-POST-PROCESSING.md
+        - knowledge/12-ZIP-WORKFLOW-AND-RELEASE.md
   plugin:
     enabled: true
     compatibility: reduced
