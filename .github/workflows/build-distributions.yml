@@ -4,6 +4,13 @@ on:
   push:
   pull_request:
   workflow_dispatch:
+    inputs:
+      release_tag:
+        description: 'Existing pre-release tag to attach packages to (leave blank for validation only)'
+        required: false
+        type: string
+  release:
+    types: [published]
 
 permissions:
   contents: read
@@ -13,6 +20,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event_name == 'release' && github.event.release.tag_name || inputs.release_tag || github.sha }}
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
@@ -34,8 +43,22 @@ jobs:
           assert {s['id'] for s in c['skills']['definitions']} == {'graphics-creation', 'asset-production'}
           assert c['release']['current_version']==open('VERSION').read().strip()
           PYCODE
+      - name: Resolve package version from release tag
+        id: package_version
+        env:
+          RELEASE_TAG: ${{ github.event_name == 'release' && github.event.release.tag_name || inputs.release_tag || '' }}
+        run: |
+          if [ -n "$RELEASE_TAG" ]; then
+            if [[ ! "$RELEASE_TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.-]+)?$ ]]; then
+              echo "Invalid release tag: $RELEASE_TAG" >&2
+              exit 1
+            fi
+            echo "version=${RELEASE_TAG#v}" >> "$GITHUB_OUTPUT"
+          else
+            echo "version=$(cat VERSION)" >> "$GITHUB_OUTPUT"
+          fi
       - name: Build enabled packages with original Engine 1.6.33
-        run: python scripts/build_distributions.py --project-root . --version "$(cat VERSION)"
+        run: python scripts/build_distributions.py --project-root . --version "${{ steps.package_version.outputs.version }}"
       - name: Validate generated distributions
         run: python scripts/validate_distributions.py --project-root .
       - name: Verify all five package targets
@@ -56,3 +79,25 @@ jobs:
             dist/SHA256SUMS.txt
             dist/DELIVERY-MANIFEST.json
           retention-days: 14
+
+  publish-release-assets:
+    if: ${{ github.event_name == 'release' || (github.event_name == 'workflow_dispatch' && inputs.release_tag != '') }}
+    needs: validate-source-and-packages
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      actions: read
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: game-graphics-creator-unreleased-${{ github.sha }}
+          path: dist
+      - name: Upload verified packages to existing GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ github.event_name == 'release' && github.event.release.tag_name || inputs.release_tag }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          test -n "$RELEASE_TAG"
+          gh release view "$RELEASE_TAG" --repo "$GH_REPO" >/dev/null
+          gh release upload "$RELEASE_TAG" dist/*.zip dist/SHA256SUMS.txt dist/DELIVERY-MANIFEST.json --clobber --repo "$GH_REPO"
