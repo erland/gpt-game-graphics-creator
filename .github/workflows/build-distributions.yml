@@ -59,6 +59,8 @@ jobs:
           fi
       - name: Validate G12 and G16 acceptance contracts
         run: python -m unittest discover -s tests/e2e -p 'test_acceptance_contracts.py' -v
+      - name: Verify remaining G03-G15 test scenario fixtures
+        run: python -m unittest discover -s tests/e2e/remaining -p 'test_remaining_fixtures.py' -v
       - name: Build enabled packages with original Engine 1.6.33
         run: python scripts/build_distributions.py --project-root . --version "${{ steps.package_version.outputs.version }}"
       - name: Validate generated distributions
